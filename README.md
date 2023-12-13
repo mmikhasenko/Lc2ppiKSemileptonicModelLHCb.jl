@@ -20,27 +20,42 @@ Pkg.add("https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl")  # thi
 Pkg.add("YAML")  # for parameter files
 ```
 
+### New project and environment
+
+In case you install a fresh julia on your laptop,
+follow the steps to create a new project folder, install `Lc2ppiKSemileptonicModelLHCb` to dependences.
+
+1. start julia in a terminal
+2. locate yourself with `pwd()`
+3. go to a new project  folder with `cd("path")` and `mkdir("folder")` if needed
+4. once you are in a project folder, do 
+```julia
+] activate
+```
+5. check that you have a clean environment with 
+```julia
+] st
+```
+6. add dependences
+```julia
+] 
+add http://github.com/mmikhasenko/ThreeBodyDecay.jl
+add http://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl
+```
+
 ## Usage
 
 After installation, you can import the package and begin your analysis:
 
 ```julia
 using Lc2ppiKSemileptonicModelLHCb
+using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecay
 
-# get parameters
-using YAML
-isobarsinput = YAML.load_file(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"));
-modelparameters = YAML.load_file(joinpath(@__DIR__, "..", "data", "model-definitions.yaml"));
-defaultparameters = modelparameters["Default amplitude model"]
+model = published_model("Default amplitude model")
 
-# get parameters from json files
-# convert to the standard convention
-(; chains, couplings, isobarnames) =
-    parse_model_dictionaries(defaultparameters; particledict=isobarsinput)
-
-# set up the model with a numbering
-# 0: Lc, 1:p, 2:pi, 3:K
-model = Lc2ppiKModel(; chains, couplings, isobarnames)
+# module is a simple combination of `couplings` and `chains` arrays
+# where the chain is rather flat structure of decay information
+model.chains[3] |> dump
 
 # get a random point in the phase space
 σs0 = randomPoint(model.chains[1].tbs.ms)  # (σ1 = m23², σ2 = m31², σ3 = m12²)
@@ -50,6 +65,15 @@ _I = unpolarizedintensity(model, σs0)
 
 # call the amplitude
 _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, helicity values
+
+# take TBS algebra for dalitz plot
+const ms = model.chains[1].tbs.ms
+σs_test = Invatriants(ms, σ1 = <your mKpi^2>, σ2 = <your mkp^2>)
+# 
+# evaluate what you want
+unpolarizedintensity(model, σs_test) # full model
+amplitude(model, σs0, [1, 0, 0, 1])
+amplitude(model.chains[2], σs0, [1, 0, 0, 1])  # for just 1 chain, number 2
 ```
 
 ## Contributing
