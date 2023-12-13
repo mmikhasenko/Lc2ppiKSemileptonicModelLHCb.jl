@@ -248,7 +248,7 @@ version = "1.10.0"
 [[deps.ThreeBodyDecay]]
 deps = ["Cuba", "Parameters", "PartialWaveFunctions", "Polynomials", "QuadGK", "RecipesBase", "StaticArrays"]
 git-tree-sha1 = "69833f51e793cd43cfadec21f230731414b5b6a3"
-repo-rev = "master"
+repo-rev = "v0.6.0"
 repo-url = "https://github.com/mmikhasenko/ThreeBodyDecay.jl"
 uuid = "e6563dab-9ca1-5843-bde3-2ccf38d63843"
 version = "0.6.0"
