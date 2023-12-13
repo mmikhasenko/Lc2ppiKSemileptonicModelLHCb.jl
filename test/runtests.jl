@@ -33,3 +33,7 @@ _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, 
 @assert _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0=1))
 
 @test _A isa Complex
+
+
+default_model = published_model("Default amplitude model")
+@test default_model isa Lc2ppiKModel

@@ -1,6 +1,6 @@
 module Lc2ppiKSemileptonicModelLHCb
 
-using JSON
+using JSON, YAML
 #
 using LinearAlgebra
 using StaticArrays
@@ -41,6 +41,7 @@ export readjson, writejson
 export parseshapedparameter
 export replacementpair
 export parse_model_dictionaries
+export published_model
 include("io.jl")
 
 

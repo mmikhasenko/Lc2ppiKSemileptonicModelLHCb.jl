@@ -132,3 +132,18 @@ function parse_model_dictionaries(modeldict; particledict)
 
     (; chains, couplings, isobarnames)
 end
+
+
+
+function published_model(modelname="Default amplitude model")
+    # 
+    isobarsinput = YAML.load_file(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
+    modelparameters = YAML.load_file(joinpath(@__DIR__, "..", "data", "model-definitions.yaml"))
+    defaultparameters = modelparameters[modelname]
+    # 
+    (; chains, couplings, isobarnames) =
+        parse_model_dictionaries(defaultparameters; particledict=isobarsinput)
+    model = Lc2ppiKModel(; chains, couplings, isobarnames)
+    # 
+    return model
+end
