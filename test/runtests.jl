@@ -29,7 +29,7 @@ _I = unpolarizedintensity(model, σs0)
 @test _I isa Real
 
 # call the amplitude
-_A = amplitude(model, σs0, [1, 0, 0, 1]) # helici
+_A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, helicity values
 @assert _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0=1))
 
 @test _A isa Complex
