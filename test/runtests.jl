@@ -64,3 +64,22 @@ end
 end
 
 
+@testset "MeasuredParameter with cases" begin
+    @test MeasuredParameter(1.0, 0.1, 0.2, 0.3) isa MeasuredParameter
+    @test MeasuredParameter(1.0, 0.1) isa MeasuredParameter
+    @test MeasuredParameter("0.91 ± 0.04 ± 0.35 ± 0.04") ==
+          MeasuredParameter(0.91, 0.04, 0.35, 0.04)
+    @test MeasuredParameter("0.91 ± 0.04") ==
+          MeasuredParameter(0.91, 0.04, 0.0, 0.0)
+end
+
+
+@testset "Alternative models" begin
+    list_of_models = keys(modelparameters)
+    # exclude the last one, which is the LS model
+    # it cannot be loaded, not implemented
+    list_of_models_but_last = list_of_models[1:end-1]
+    @test map(list_of_models_but_last) do modelname
+        published_model(modelname) isa Lc2ppiKModel
+    end |> all
+end
