@@ -16,8 +16,8 @@ To install `Lc2ppiKSemileptonicModelLHCb.jl`, use the Julia package manager:
 
 ```julia
 using Pkg
+Pkg.add("https://github.com/mmikhasenko/ThreeBodyDecay.jl") 
 Pkg.add("https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl")  # this code
-Pkg.add("YAML")  # for parameter files
 ```
 
 ### New project and environment
