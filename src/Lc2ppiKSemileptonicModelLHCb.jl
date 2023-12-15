@@ -41,9 +41,9 @@ export readjson, writejson
 export parseshapedparameter
 export replacementpair
 export parse_model_dictionaries
+export expose_model_description
 export published_model
 include("io.jl")
-
 
 export two_Δλ
 export σPauli

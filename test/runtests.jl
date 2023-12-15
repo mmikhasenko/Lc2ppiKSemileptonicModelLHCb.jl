@@ -9,14 +9,22 @@ using YAML
 end
 
 # get parameters
-isobarsinput = YAML.load_file(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"));
-modelparameters = YAML.load_file(joinpath(@__DIR__, "..", "data", "model-definitions.yaml"));
+(; particledict, modelparameters) = expose_model_description()
+
+@testset "The model can be are exposed" begin
+    @test particledict isa Dict
+    @test length(particledict) > 0
+    @test modelparameters isa Dict
+    @test length(modelparameters) > 0
+    @test haskey(modelparameters, "Default amplitude model")
+end
+
 defaultparameters = modelparameters["Default amplitude model"]
 
 # get parameters from json files
 # convert to the standard convention
 (; chains, couplings, isobarnames) =
-    parse_model_dictionaries(defaultparameters; particledict=isobarsinput)
+    parse_model_dictionaries(defaultparameters; particledict)
 
 # set up the model with a numbering
 # 0: Lc, 1:p, 2:pi, 3:K
@@ -54,3 +62,5 @@ end
     summary = parameter_name.(_names, _HRk) .=> _couplings
     @test summary isa Lc2ppiKSemileptonicModelLHCb.StaticArrays.SVector{N,T} where {N,T<:Pair{String,ComplexF64}}
 end
+
+

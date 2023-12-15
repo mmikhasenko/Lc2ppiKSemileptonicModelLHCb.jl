@@ -135,14 +135,29 @@ end
 
 
 
+"""
+    expose_model_description()
+
+Reads the data, returns disctionaries of isobars and list of a dictionary of models with their parameters.
+"""
+function expose_model_description()
+    particledict = YAML.load_file(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
+    modelparameters = YAML.load_file(joinpath(@__DIR__, "..", "data", "model-definitions.yaml"))
+    return (; modelparameters, particledict)
+end
+
+
+"""
+    published_model(modelname="Default amplitude model")
+
+Reads the data, performs coupling conversion, returns the model with the parameters.
+"""
 function published_model(modelname="Default amplitude model")
     # 
-    isobarsinput = YAML.load_file(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
-    modelparameters = YAML.load_file(joinpath(@__DIR__, "..", "data", "model-definitions.yaml"))
+    (; modelparameters, particledict) = expose_model_description()
     defaultparameters = modelparameters[modelname]
-    # 
     (; chains, couplings, isobarnames) =
-        parse_model_dictionaries(defaultparameters; particledict=isobarsinput)
+        parse_model_dictionaries(defaultparameters; particledict)
     model = Lc2ppiKModel(; chains, couplings, isobarnames)
     # 
     return model
