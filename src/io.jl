@@ -68,6 +68,7 @@ function parseshapedparameter(parname)
     keytemp = r"([M,G]|gamma|alpha)"
     nametemp = r"([L,K,D]\([0-9]*\))"
     m = match(keytemp * nametemp, parname)
+    m === nothing && error("The name of the shared parameter, $(parname), is not recognized!")
     return (key=m[1], isobarname=m[2])
 end
 

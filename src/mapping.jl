@@ -5,7 +5,7 @@ function selectindexmap(isobarname)
         r"[L|D].*" => Dict(
             '1' => (1, 0),
             '2' => (-1, 0)),
-        r"K\(892\)" => Dict(
+        r"K\(892|1410\)" => Dict(
             '1' => (0, 1),
             '2' => (-2, 1),
             '3' => (2, -1),
@@ -17,6 +17,7 @@ function selectindexmap(isobarname)
     m = filter(keys(couplingindexmap)) do k
         match(k, isobarname) !== nothing
     end
+    length(m) == 0 && error("no match found for $(isobarname)!")
     return couplingindexmap[first(m)]
 end
 

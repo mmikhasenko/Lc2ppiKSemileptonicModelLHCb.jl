@@ -75,11 +75,16 @@ end
 
 
 @testset "Alternative models" begin
-    list_of_models = keys(modelparameters)
+    list_of_models = keys(modelparameters) |> collect
     # exclude the last one, which is the LS model
     # it cannot be loaded, not implemented
-    list_of_models_but_last = list_of_models[1:end-1]
-    @test map(list_of_models_but_last) do modelname
+    list_of_models_but_few = filter(list_of_models) do x
+        x != "Alternative amplitude model obtained using LS couplings" &&
+            x != "Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''" &&
+            x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc" &&
+            x != "Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)"
+    end
+    @test map(list_of_models_but_few) do modelname
         published_model(modelname) isa Lc2ppiKModel
     end |> all
 end
