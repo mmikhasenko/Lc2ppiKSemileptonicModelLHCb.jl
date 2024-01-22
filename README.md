@@ -52,7 +52,7 @@ After installation, you can import the package and begin your analysis:
 
 ```julia
 using Lc2ppiKSemileptonicModelLHCb
-using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecay
+using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecays
 
 model = published_model("Default amplitude model")
 
@@ -71,7 +71,9 @@ _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, 
 
 # take TBS algebra for dalitz plot
 const ms = model.chains[1].tbs.ms
-σs_test = Invatriants(ms, σ1 = <your mKpi^2>, σ2 = <your mkp^2>)
+σs_test = let m2Kπ = 0.79, m2πp = 3.64
+    Invatriants(ms; σ1=m2Kπ, σ2=m2πp)
+end
 #
 # evaluate what you want
 unpolarizedintensity(model, σs_test) # full model
@@ -90,7 +92,8 @@ This project is based on the original analysis conducted by the LHCb collaborati
 ## Related Projects
 
 - **Polarimetry**: Visit the [`polarimetry`](https://github.com/ComPWA/polarimetry) repository for more information on the comprehensive framework for polarization analysis.
-- **Dalitz Plot Decomposition**: the model contention are aligned with [Dalitz-plot decomposition](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.101.034033). See [ThreeBodyDecay.jl](https://github.com/mmikhasenko/ThreeBodyDecay.jl) and [SymbolicThreeBodyDecays.jl](https://github.com/mmikhasenko/SymbolicThreeBodyDecays.jl) for further details.
+- **Dalitz Plot Decomposition**: the model contention are aligned with [Dalitz-plot decomposition](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.101.034033).
+  See [ThreeBodyDecays.jl](https://github.com/mmikhasenko/ThreeBodyDecays.jl) and [SymbolicThreeBodyDecays.jl](https://github.com/mmikhasenko/SymbolicThreeBodyDecays.jl) for further details.
 
 ## License
 
