@@ -11,8 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - '1.7'
-          - 'nightly'
+          - "1.10"
+          - "nightly"
         os:
           - ubuntu-latest
           - macOS-latest
@@ -20,7 +20,7 @@ jobs:
         arch:
           - x64
     env:
-      PYTHON: ''
+      PYTHON: ""
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
