@@ -36,6 +36,7 @@ model = Lc2ppiKModel(; chains, couplings, isobarnames)
     @test model == published_model("Default amplitude model")
 end
 
+
 # get a random point in the phase space
 σs0 = randomPoint(model.chains[1].tbs.ms)  # (σ1 = m23², σ2 = m31², σ3 = m12²)
 
@@ -51,6 +52,10 @@ _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, 
     @test _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0=1))
 end
 
+@testset "Exact values of amplitude and intensity" begin
+    @test _I ≈ 6302.587073290807
+    @test _A ≈ -0.7072336123636882 - 14.887651207373576im
+end
 
 @testset "Parameters and couplings" begin
     _names = model.isobarnames
