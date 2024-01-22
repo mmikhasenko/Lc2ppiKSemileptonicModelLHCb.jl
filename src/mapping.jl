@@ -24,14 +24,14 @@ end
 function parname2decaychain(parname, isobars)
     isobarname = parname[3:end-1]
     #
-    @unpack k, Hij, two_s, Xlineshape, parity = isobars[isobarname]
+    @unpack k, Hij, two_j, Xlineshape, parity = isobars[isobarname]
     #
     couplingindex = parname[end]
     two_λR, two_λk = selectindexmap(isobarname)[couplingindex]
     two_λR′, two_λk′, c′ =
-        couplingLHCb2DPD(two_λR, two_λk; k, two_j=two_s, parity)
+        couplingLHCb2DPD(two_λR, two_λk; k, two_j, parity)
     HRk = NoRecoupling(two_λR′, two_λk′)
-    (c′, DecayChain(; k, Xlineshape, Hij, HRk, two_s, tbs))
+    (c′, DecayChain(; k, Xlineshape, Hij, HRk, two_j, tbs))
 end
 
 

@@ -1,6 +1,6 @@
 using Test
 using Lc2ppiKSemileptonicModelLHCb
-using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecay
+using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecays
 using YAML
 
 @testset "Data files are there" begin

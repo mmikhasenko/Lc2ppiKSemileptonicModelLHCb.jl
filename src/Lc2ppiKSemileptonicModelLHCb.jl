@@ -6,8 +6,8 @@ using LinearAlgebra
 using StaticArrays
 using Parameters
 #
-using ThreeBodyDecay
-import ThreeBodyDecay: amplitude
+using ThreeBodyDecays
+import ThreeBodyDecays: amplitude
 #
 using RecipesBase
 
