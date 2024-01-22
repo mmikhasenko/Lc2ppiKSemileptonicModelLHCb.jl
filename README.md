@@ -16,7 +16,6 @@ To install `Lc2ppiKSemileptonicModelLHCb.jl`, use the Julia package manager:
 
 ```julia
 using Pkg
-Pkg.add("https://github.com/mmikhasenko/ThreeBodyDecay.jl") 
 Pkg.add("https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl")  # this code
 ```
 
@@ -27,19 +26,23 @@ follow the steps to create a new project folder, install `Lc2ppiKSemileptonicMod
 
 1. start julia in a terminal
 2. locate yourself with `pwd()`
-3. go to a new project  folder with `cd("path")` and `mkdir("folder")` if needed
-4. once you are in a project folder, do 
+3. go to a new project folder with `cd("path")` and `mkdir("folder")` if needed
+4. once you are in a project folder, do
+
 ```julia
 ] activate
 ```
-5. check that you have a clean environment with 
+
+5. check that you have a clean environment with
+
 ```julia
 ] st
 ```
+
 6. add dependences
+
 ```julia
-] 
-add http://github.com/mmikhasenko/ThreeBodyDecay.jl
+]
 add http://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl
 ```
 
@@ -69,7 +72,7 @@ _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, 
 # take TBS algebra for dalitz plot
 const ms = model.chains[1].tbs.ms
 σs_test = Invatriants(ms, σ1 = <your mKpi^2>, σ2 = <your mkp^2>)
-# 
+#
 # evaluate what you want
 unpolarizedintensity(model, σs_test) # full model
 amplitude(model, σs0, [1, 0, 0, 1])
@@ -79,7 +82,6 @@ amplitude(model.chains[2], σs0, [1, 0, 0, 1])  # for just 1 chain, number 2
 ## Contributing
 
 Contributions to `Lc2ppiKSemileptonicModelLHCb.jl` are welcome. Just create an issue.
-
 
 ## Reference to LHCb Analysis
 
