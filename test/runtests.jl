@@ -30,9 +30,8 @@ defaultparameters = modelparameters["Default amplitude model"]
 # 0: Lc, 1:p, 2:pi, 3:K
 model = Lc2ppiKModel(; chains, couplings, isobarnames)
 
-
 @testset "Pulling default model" begin
-    @test model isa Lc2ppiKModel
+    @test model isa ThreeBodyDecay
     @test model == published_model("Default amplitude model")
 end
 
@@ -42,7 +41,7 @@ end
     σ2=3.6486261122281745)
 
 # call intensity
-_I = unpolarizedintensity(model, σs0)
+_I = unpolarized_intensity(model, σs0)
 
 # call the amplitude
 _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, helicity values
@@ -53,6 +52,8 @@ _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, 
     @test _A isa Complex
     @test _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0=1))
 end
+
+
 
 @testset "Exact values of amplitude and intensity" begin
     @test _I ≈ 9345.853380852352
@@ -69,7 +70,7 @@ end
 end
 
 @testset "Parameters and couplings" begin
-    _names = model.isobarnames
+    _names = model.names
     _HRk = getproperty.(model.chains, :HRk)
     _couplings = model.couplings
     parameter_name(isobarname, recoupling) =
@@ -101,6 +102,6 @@ end
             x != "Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)"
     end
     @test map(list_of_models_but_few) do modelname
-        published_model(modelname) isa Lc2ppiKModel
+        published_model(modelname) isa ThreeBodyDecay
     end |> all
 end
