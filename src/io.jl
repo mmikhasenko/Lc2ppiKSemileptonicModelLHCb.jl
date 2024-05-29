@@ -30,7 +30,7 @@ function definechaininputs(key, dict)
     #
     jp_R = str2jp(dict["jp"])
     parity = jp_R.p
-    two_j = jp_R.j |> x2
+    two_j = jp_R.two_j
     #
     massval, widthval = ifhyphenaverage.((mass, width)) ./ 1e3
     #
@@ -38,15 +38,17 @@ function definechaininputs(key, dict)
     #
     @unpack two_js = tbs
     #
-    reaction_ij = jp_R => (jp(two_js[i] // 2, parities[i]), jp(two_js[j] // 2, parities[j]))
-    reaction_Rk(P0) = jp(two_js[4] // 2, P0) => (jp_R, jp(two_js[k] // 2, parities[k]))
+    reaction_ij = jp_R => (SpinParity(two_js[i], parities[i]), SpinParity(two_js[j], parities[j]))
+    reaction_Rk(P0) = SpinParity(two_js[4], P0) => (jp_R, SpinParity(two_js[k], parities[k]))
     #
-    LS = vcat(possible_ls.(reaction_Rk.(('+', '-')))...)
-    minLS = first(sort(vcat(LS...); by=x -> x[1]))
+    two_LS = vcat(possible_ls.(reaction_Rk.(('+', '-')))...)
+    minLS = first(sort(vcat(two_LS...); by=x -> x[1]))
+    minL = div(minLS[1], 2)
     #
     ls = possible_ls(reaction_ij)
     length(ls) != 1 && error("expected the only ls: $(ls)")
-    onlyls = first(ls)
+    only_two_ls = first(ls)
+    l = div(only_two_ls[1], 2)
     #
     Hij = ParityRecoupling(two_js[i], two_js[j], reaction_ij)
     Xlineshape = eval(
@@ -54,8 +56,8 @@ function definechaininputs(key, dict)
             $(Symbol(lineshape))(
                 (; m=$massval, Γ=$widthval);
                 name=$key,
-                l=$(onlyls[1]),
-                minL=$(minLS[1]),
+                l=$l,
+                minL=$minL,
                 m1=$(ms[i]), m2=$(ms[j]), mk=$(ms[k]), m0=$(ms[4]))
         end)
     return (; k, Xlineshape, Hij, two_j, parity)
