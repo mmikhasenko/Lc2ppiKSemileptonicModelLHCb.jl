@@ -105,6 +105,3 @@ This project is based on the original analysis conducted by the LHCb collaborati
 - **Dalitz Plot Decomposition**: the model contention are aligned with [Dalitz-plot decomposition](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.101.034033).
   See [ThreeBodyDecays.jl](https://github.com/mmikhasenko/ThreeBodyDecays.jl) and [SymbolicThreeBodyDecays.jl](https://github.com/mmikhasenko/SymbolicThreeBodyDecays.jl) for further details.
 
-## How to Cite
-
-If you use Lc2ppiKSemileptonicModelLHCb.jl in your work, please cite using the reference given in [CITATION.cff](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/blob/main/CITATION.cff).
