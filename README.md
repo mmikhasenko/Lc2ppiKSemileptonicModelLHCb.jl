@@ -39,22 +39,22 @@ follow the steps to create a new project folder, install `Lc2ppiKSemileptonicMod
 3. go to a new project folder with `cd("path")` and `mkdir("folder")` if needed
 4. once you are in a project folder, do
 
-```julia
-] activate
-```
+    ```julia
+    ] activate
+    ```
 
 5. check that you have a clean environment with
 
-```julia
-] st
-```
+    ```julia
+    ] st
+    ```
 
 6. add dependences
 
-```julia
-]
-add http://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl
-```
+    ```julia
+    ]
+    add http://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl
+    ```
 
 ## Usage
 
@@ -91,7 +91,6 @@ amplitude(model, σs0, [1, 0, 0, 1])
 amplitude(model.chains[2], σs0, [1, 0, 0, 1])  # for just 1 chain, number 2
 ```
 
-
 ## Contributing
 
 Contributions to `Lc2ppiKSemileptonicModelLHCb.jl` are welcome. Just create an issue.
@@ -105,7 +104,6 @@ This project is based on the original analysis conducted by the LHCb collaborati
 - **Polarimetry**: Visit the [`polarimetry`](https://github.com/ComPWA/polarimetry) repository for more information on the comprehensive framework for polarization analysis.
 - **Dalitz Plot Decomposition**: the model contention are aligned with [Dalitz-plot decomposition](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.101.034033).
   See [ThreeBodyDecays.jl](https://github.com/mmikhasenko/ThreeBodyDecays.jl) and [SymbolicThreeBodyDecays.jl](https://github.com/mmikhasenko/SymbolicThreeBodyDecays.jl) for further details.
-
 
 ## How to Cite
 

@@ -38,11 +38,13 @@ function definechaininputs(key, dict)
     #
     @unpack two_js = tbs
     #
-    reaction_ij = jp_R => (SpinParity(two_js[i], parities[i]), SpinParity(two_js[j], parities[j]))
-    reaction_Rk(P0) = SpinParity(two_js[4], P0) => (jp_R, SpinParity(two_js[k], parities[k]))
+    reaction_ij =
+        jp_R => (SpinParity(two_js[i], parities[i]), SpinParity(two_js[j], parities[j]))
+    reaction_Rk(P0) =
+        SpinParity(two_js[4], P0) => (jp_R, SpinParity(two_js[k], parities[k]))
     #
     two_LS = vcat(possible_ls.(reaction_Rk.(('+', '-')))...)
-    minLS = first(sort(vcat(two_LS...); by=x -> x[1]))
+    minLS = first(sort(vcat(two_LS...); by = x -> x[1]))
     minL = div(minLS[1], 2)
     #
     ls = possible_ls(reaction_ij)
@@ -54,12 +56,17 @@ function definechaininputs(key, dict)
     Xlineshape = eval(
         quote
             $(Symbol(lineshape))(
-                (; m=$massval, Γ=$widthval);
-                name=$key,
-                l=$l,
-                minL=$minL,
-                m1=$(ms[i]), m2=$(ms[j]), mk=$(ms[k]), m0=$(ms[4]))
-        end)
+                (; m = $massval, Γ = $widthval);
+                name = $key,
+                l = $l,
+                minL = $minL,
+                m1 = $(ms[i]),
+                m2 = $(ms[j]),
+                mk = $(ms[k]),
+                m0 = $(ms[4]),
+            )
+        end,
+    )
     return (; k, Xlineshape, Hij, two_j, parity)
 end
 
@@ -70,8 +77,9 @@ function parseshapedparameter(parname)
     keytemp = r"([M,G]|gamma|alpha)"
     nametemp = r"([L,K,D]\([0-9]*\))"
     m = match(keytemp * nametemp, parname)
-    m === nothing && error("The name of the shared parameter, $(parname), is not recognized!")
-    return (key=m[1], isobarname=m[2])
+    m === nothing &&
+        error("The name of the shared parameter, $(parname), is not recognized!")
+    return (key = m[1], isobarname = m[2])
 end
 
 function keyname2symbol(key)
@@ -104,13 +112,12 @@ function parse_model_dictionaries(modeldict; particledict)
     defaultparameters = modeldict["parameters"]
     shapeparameters = filter(x -> x[1] != 'A', keys(defaultparameters))
     parameterupdates = [
-        replacementpair(parname, defaultparameters[parname])
-        for parname in shapeparameters]
+        replacementpair(parname, defaultparameters[parname]) for parname in shapeparameters
+    ]
 
     for (p, u) in parameterupdates
         BW = isobars[p].Xlineshape
-        isobars[p] = merge(isobars[p],
-            (Xlineshape=updatepars(BW, merge(BW.pars, u)),))
+        isobars[p] = merge(isobars[p], (Xlineshape = updatepars(BW, merge(BW.pars, u)),))
     end
 
     # 3) get couplings
@@ -144,8 +151,10 @@ end
 Reads the data, returns disctionaries of isobars and list of a dictionary of models with their parameters.
 """
 function expose_model_description()
-    particledict = YAML.load_file(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
-    modelparameters = YAML.load_file(joinpath(@__DIR__, "..", "data", "model-definitions.yaml"))
+    particledict =
+        YAML.load_file(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
+    modelparameters =
+        YAML.load_file(joinpath(@__DIR__, "..", "data", "model-definitions.yaml"))
     return (; modelparameters, particledict)
 end
 
@@ -155,13 +164,13 @@ end
 
 Reads the data, performs coupling conversion, returns the model with the parameters.
 """
-function published_model(modelname="Default amplitude model")
-    # 
+function published_model(modelname = "Default amplitude model")
+    #
     (; modelparameters, particledict) = expose_model_description()
     defaultparameters = modelparameters[modelname]
     (; chains, couplings, isobarnames) =
         parse_model_dictionaries(defaultparameters; particledict)
     model = Lc2ppiKModel(; chains, couplings, isobarnames)
-    # 
+    #
     return model
 end

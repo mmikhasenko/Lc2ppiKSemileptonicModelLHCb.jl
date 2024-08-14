@@ -2,17 +2,11 @@
 function selectindexmap(isobarname)
     #
     couplingindexmap = Dict(
-        r"[L|D].*" => Dict(
-            '1' => (1, 0),
-            '2' => (-1, 0)),
-        r"K\(892|1410\)" => Dict(
-            '1' => (0, 1),
-            '2' => (-2, 1),
-            '3' => (2, -1),
-            '4' => (0, -1)),
-        r"K\(700|1430\)" => Dict(
-            '1' => (0, -1),
-            '2' => (0, 1)))
+        r"[L|D].*" => Dict('1' => (1, 0), '2' => (-1, 0)),
+        r"K\(892|1410\)" =>
+            Dict('1' => (0, 1), '2' => (-2, 1), '3' => (2, -1), '4' => (0, -1)),
+        r"K\(700|1430\)" => Dict('1' => (0, -1), '2' => (0, 1)),
+    )
     #
     m = filter(keys(couplingindexmap)) do k
         match(k, isobarname) !== nothing
@@ -28,8 +22,7 @@ function parname2decaychain(parname, isobars)
     #
     couplingindex = parname[end]
     two_λR, two_λk = selectindexmap(isobarname)[couplingindex]
-    two_λR′, two_λk′, c′ =
-        couplingLHCb2DPD(two_λR, two_λk; k, two_j, parity)
+    two_λR′, two_λk′, c′ = couplingLHCb2DPD(two_λR, two_λk; k, two_j, parity)
     HRk = NoRecoupling(two_λR′, two_λk′)
     (c′, DecayChain(; k, Xlineshape, Hij, HRk, two_j, tbs))
 end
@@ -56,7 +49,8 @@ The relation is
 A^{DPD}_{λ₀,λ₁} = (-1)^{½-λ₁} A^{LHCb}_{λ₀,-λ₁}
 ```
 """
-amplitudeLHCb2DPD(A) =
-    [A[1, 2] -A[1, 1]
-        A[2, 2] -A[2, 1]]
+amplitudeLHCb2DPD(A) = [
+    A[1, 2] -A[1, 1]
+    A[2, 2] -A[2, 1]
+]
 #

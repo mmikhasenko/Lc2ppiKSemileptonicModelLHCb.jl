@@ -34,7 +34,9 @@ function (BW::BreitWignerMinL)(σ)
     p, p0 = breakup(σ, m1^2, m2^2), breakup(m^2, m1^2, m2^2)
     q, q0 = breakup(m0^2, σ, mk^2), breakup(m0^2, m^2, mk^2)
     Γ = Γ₀ * (p / p0)^(2l + 1) * m / sqrt(σ) * F²(l, p, p0, dR)
-    1 / (m^2 - σ - 1im * m * Γ) * (p / p0)^l * (q / q0)^minL *
+    1 / (m^2 - σ - 1im * m * Γ) *
+    (p / p0)^l *
+    (q / q0)^minL *
     sqrt(F²(l, p, p0, dR) * F²(minL, q, q0, dΛc))
 end
 
@@ -51,9 +53,11 @@ end
     mk::Float64
     m0::Float64
 end
-BuggBreitWignerMinL(pars::T; kw...) where {
-    T<:NamedTuple{X,Tuple{Float64,Float64}}} where {X} =
-    BuggBreitWignerMinL(; pars=merge(pars, (γ=1.1,)), kw...)
+BuggBreitWignerMinL(
+    pars::T;
+    kw...,
+) where {T<:NamedTuple{X,Tuple{Float64,Float64}}} where {X} =
+    BuggBreitWignerMinL(; pars = merge(pars, (γ = 1.1,)), kw...)
 #
 function (BW::BuggBreitWignerMinL)(σ)
     σA = mK^2 - mπ^2 / 2
@@ -99,10 +103,9 @@ end
 
 
 @recipe function f(BW::Lineshape)
-    xv = range((BW.m1 + BW.m2)^2, (BW.m0 - BW.mk)^2, length=300)
-    intensity(σ) = abs2(BW(σ)) *
-                   breakup(σ, BW.m1^2, BW.m2^2) *
-                   breakup(BW.m0^2, σ, BW.mk^2) / sqrt(σ)
+    xv = range((BW.m1 + BW.m2)^2, (BW.m0 - BW.mk)^2, length = 300)
+    intensity(σ) =
+        abs2(BW(σ)) * breakup(σ, BW.m1^2, BW.m2^2) * breakup(BW.m0^2, σ, BW.mk^2) / sqrt(σ)
     yv = intensity.(xv)
     (xv, yv ./ sum(yv) .* length(yv))
 end
