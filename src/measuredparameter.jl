@@ -9,8 +9,7 @@ end
 
 Create a `MeasuredParameter` with `val` and `stat` uncertainty. The model uncertainty and systematic uncertainty are set to zero.
 """
-MeasuredParameter(val, stat) =
-    MeasuredParameter(val, stat, 0.0, 0.0)
+MeasuredParameter(val, stat) = MeasuredParameter(val, stat, 0.0, 0.0)
 
 """
     MeasuredParameter(str::AbstractString)

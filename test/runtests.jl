@@ -1,7 +1,7 @@
 using Test
 using Lc2ppiKSemileptonicModelLHCb
 using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecays
-using YAML
+using Lc2ppiKSemileptonicModelLHCb.YAML
 
 @testset "Data files are there" begin
     @test isfile(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
@@ -36,9 +36,7 @@ model = Lc2ppiKModel(; chains, couplings, isobarnames)
 end
 
 # get a random point in the phase space
-σs0 = Invariants(model.chains[1].tbs.ms;
-    σ1=0.7980703453578917,
-    σ2=3.6486261122281745)
+σs0 = Invariants(model.chains[1].tbs.ms; σ1 = 0.7980703453578917, σ2 = 3.6486261122281745)
 
 # call intensity
 _I = unpolarized_intensity(model, σs0)
@@ -50,7 +48,7 @@ _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, 
 @testset "Evaluation of the meeting" begin
     @test _I isa Real
     @test _A isa Complex
-    @test _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0=1))
+    @test _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0 = 1))
 end
 
 
@@ -58,14 +56,16 @@ end
 @testset "Exact values of amplitude and intensity" begin
     @test _I ≈ 9345.853380852352
     @test _A ≈ -45.1323269502508 + 54.85942516648639im
-    # 
+    #
     @test model.chains[1].Xlineshape(σs0.σ2) ≈
-          model.chains[2].Xlineshape(σs0.σ2) ≈ -0.5636481410171861 + 0.13763637759224928im
-    # 
+          model.chains[2].Xlineshape(σs0.σ2) ≈
+          -0.5636481410171861 + 0.13763637759224928im
+    #
     @test model.chains[21].Xlineshape(σs0.σ1) ≈
           model.chains[22].Xlineshape(σs0.σ1) ≈
           model.chains[23].Xlineshape(σs0.σ1) ≈
-          model.chains[24].Xlineshape(σs0.σ1) ≈ 2.1687201455088894 + 23.58225917009096im
+          model.chains[24].Xlineshape(σs0.σ1) ≈
+          2.1687201455088894 + 23.58225917009096im
 
 end
 
@@ -74,10 +74,18 @@ end
     _HRk = getproperty.(model.chains, :HRk)
     _couplings = model.couplings
     parameter_name(isobarname, recoupling) =
-        isobarname * "_{" * string(recoupling.two_λa) * ", " * string(recoupling.two_λb) * "}"
+        isobarname *
+        "_{" *
+        string(recoupling.two_λa) *
+        ", " *
+        string(recoupling.two_λb) *
+        "}"
 
     summary = parameter_name.(_names, _HRk) .=> _couplings
-    @test summary isa Lc2ppiKSemileptonicModelLHCb.StaticArrays.SVector{N,T} where {N,T<:Pair{String,ComplexF64}}
+    @test summary isa Lc2ppiKSemileptonicModelLHCb.StaticArrays.SVector{
+        N,
+        T,
+    } where {N,T<:Pair{String,ComplexF64}}
 end
 
 
@@ -86,8 +94,7 @@ end
     @test MeasuredParameter(1.0, 0.1) isa MeasuredParameter
     @test MeasuredParameter("0.91 ± 0.04 ± 0.35 ± 0.04") ==
           MeasuredParameter(0.91, 0.04, 0.35, 0.04)
-    @test MeasuredParameter("0.91 ± 0.04") ==
-          MeasuredParameter(0.91, 0.04, 0.0, 0.0)
+    @test MeasuredParameter("0.91 ± 0.04") == MeasuredParameter(0.91, 0.04, 0.0, 0.0)
 end
 
 
@@ -97,9 +104,12 @@ end
     # it cannot be loaded, not implemented
     list_of_models_but_few = filter(list_of_models) do x
         x != "Alternative amplitude model obtained using LS couplings" &&
-            x != "Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''" &&
-            x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc" &&
-            x != "Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)"
+            x !=
+            "Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''" &&
+            x !=
+            "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc" &&
+            x !=
+            "Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)"
     end
     @test map(list_of_models_but_few) do modelname
         published_model(modelname) isa ThreeBodyDecay

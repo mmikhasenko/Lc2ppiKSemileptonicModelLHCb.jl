@@ -23,7 +23,7 @@ The fit results is stored in the `first(file["modelstudies"])`. The dictionary c
 - the `F` stands for `D`,`L`, or `K`.
 - the `N` numbers the helicity indices with the following mapping
 
-```
+```txt
 # Lambda**
 L(XXXX)1 -> K^{Lc->Lambda pi}_{+1/2,0}
 L(XXXX)2 -> K^{Lc->Lambda pi}_{-1/2,0}

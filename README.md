@@ -1,4 +1,14 @@
-# Lc2pKpi Semileptonic Model from LHCb publication
+# Lc2ppiKSemileptonicModelLHCb
+
+[![Stable Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://mmikhasenko.github.io/Lc2ppiKSemileptonicModelLHCb.jl/stable)
+[![In development documentation](https://img.shields.io/badge/docs-dev-blue.svg)](https://mmikhasenko.github.io/Lc2ppiKSemileptonicModelLHCb.jl/dev)
+[![Build Status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/workflows/Test/badge.svg)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions)
+[![Test workflow status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Test.yml/badge.svg?branch=main)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Test.yml?query=branch%3Amain)
+[![Lint workflow Status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Lint.yml/badge.svg?branch=main)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Lint.yml?query=branch%3Amain)
+[![Docs workflow Status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Docs.yml/badge.svg?branch=main)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Docs.yml?query=branch%3Amain)
+
+[![Coverage](https://codecov.io/gh/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl)
+[![DOI](https://zenodo.org/badge/DOI/FIXME)](https://doi.org/FIXME)
 
 [![10.1007/JHEP07(2023)228](<https://zenodo.org/badge/doi/10.1007/JHEP07(2023)228.svg>)](<https://doi.org/10.1007/JHEP07(2023)228>)
 [![GPLv3+ license](https://img.shields.io/badge/License-GPLv3+-blue.svg)](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
@@ -29,22 +39,22 @@ follow the steps to create a new project folder, install `Lc2ppiKSemileptonicMod
 3. go to a new project folder with `cd("path")` and `mkdir("folder")` if needed
 4. once you are in a project folder, do
 
-```julia
-] activate
-```
+    ```julia
+    ] activate
+    ```
 
 5. check that you have a clean environment with
 
-```julia
-] st
-```
+    ```julia
+    ] st
+    ```
 
 6. add dependences
 
-```julia
-]
-add http://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl
-```
+    ```julia
+    ]
+    add http://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl
+    ```
 
 ## Usage
 
@@ -94,7 +104,3 @@ This project is based on the original analysis conducted by the LHCb collaborati
 - **Polarimetry**: Visit the [`polarimetry`](https://github.com/ComPWA/polarimetry) repository for more information on the comprehensive framework for polarization analysis.
 - **Dalitz Plot Decomposition**: the model contention are aligned with [Dalitz-plot decomposition](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.101.034033).
   See [ThreeBodyDecays.jl](https://github.com/mmikhasenko/ThreeBodyDecays.jl) and [SymbolicThreeBodyDecays.jl](https://github.com/mmikhasenko/SymbolicThreeBodyDecays.jl) for further details.
-
-## License
-
-`Lc2ppiKSemileptonicModelLHCb.jl` is available under [GPLv3+ license](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/blob/main/LICENSE).
