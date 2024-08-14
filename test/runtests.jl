@@ -1,7 +1,7 @@
 using Test
 using Lc2ppiKSemileptonicModelLHCb
 using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecays
-using YAML
+using Lc2ppiKSemileptonicModelLHCb.YAML
 
 @testset "Data files are there" begin
     @test isfile(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
