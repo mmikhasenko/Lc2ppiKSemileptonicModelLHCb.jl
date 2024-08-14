@@ -1,4 +1,14 @@
-# Lc2pKpi Semileptonic Model from LHCb publication
+# Lc2ppiKSemileptonicModelLHCb
+
+[![Stable Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://mmikhasenko.github.io/Lc2ppiKSemileptonicModelLHCb.jl/stable)
+[![In development documentation](https://img.shields.io/badge/docs-dev-blue.svg)](https://mmikhasenko.github.io/Lc2ppiKSemileptonicModelLHCb.jl/dev)
+[![Build Status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/workflows/Test/badge.svg)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions)
+[![Test workflow status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Test.yml/badge.svg?branch=main)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Test.yml?query=branch%3Amain)
+[![Lint workflow Status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Lint.yml/badge.svg?branch=main)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Lint.yml?query=branch%3Amain)
+[![Docs workflow Status](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Docs.yml/badge.svg?branch=main)](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/actions/workflows/Docs.yml?query=branch%3Amain)
+
+[![Coverage](https://codecov.io/gh/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl)
+[![DOI](https://zenodo.org/badge/DOI/FIXME)](https://doi.org/FIXME)
 
 [![10.1007/JHEP07(2023)228](<https://zenodo.org/badge/doi/10.1007/JHEP07(2023)228.svg>)](<https://doi.org/10.1007/JHEP07(2023)228>)
 [![GPLv3+ license](https://img.shields.io/badge/License-GPLv3+-blue.svg)](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
@@ -81,6 +91,7 @@ amplitude(model, σs0, [1, 0, 0, 1])
 amplitude(model.chains[2], σs0, [1, 0, 0, 1])  # for just 1 chain, number 2
 ```
 
+
 ## Contributing
 
 Contributions to `Lc2ppiKSemileptonicModelLHCb.jl` are welcome. Just create an issue.
@@ -95,6 +106,7 @@ This project is based on the original analysis conducted by the LHCb collaborati
 - **Dalitz Plot Decomposition**: the model contention are aligned with [Dalitz-plot decomposition](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.101.034033).
   See [ThreeBodyDecays.jl](https://github.com/mmikhasenko/ThreeBodyDecays.jl) and [SymbolicThreeBodyDecays.jl](https://github.com/mmikhasenko/SymbolicThreeBodyDecays.jl) for further details.
 
-## License
 
-`Lc2ppiKSemileptonicModelLHCb.jl` is available under [GPLv3+ license](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/blob/main/LICENSE).
+## How to Cite
+
+If you use Lc2ppiKSemileptonicModelLHCb.jl in your work, please cite using the reference given in [CITATION.cff](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/blob/main/CITATION.cff).

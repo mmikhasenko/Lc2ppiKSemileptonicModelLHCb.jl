@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier
+AnswerStrategy: minimum
+AuthorEmail: mikhail.mikhasenko@cern.ch
+AuthorName: Mikhail Mikhasenko
+Indentation: 4
+JuliaMinVersion: '1.6'
+License: MIT
+PackageName: Lc2ppiKSemileptonicModelLHCb
+PackageOwner: mmikhasenko
+PackageUUID: 2be14d12-1226-44dd-959e-4e18ae37578d
+_commit: v0.9.1
+_src_path: https://github.com/abelsiqueira/BestieTemplate.jl
