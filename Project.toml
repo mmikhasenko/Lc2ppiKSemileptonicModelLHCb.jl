@@ -18,7 +18,7 @@ Corpuscles = "2.1.1"
 DataFrames = "1.6.1"
 JSON = "0.21.4"
 LaTeXStrings = "1.3.1"
-ThreeBodyDecays = "0.11.0, 0.12"
+ThreeBodyDecays = "0.11, >=0.12.1"
 Measurements = "2.11.0"
 Parameters = "0.12.3"
 Plots = "1.39.0"
@@ -29,7 +29,6 @@ RecipesBase = "1.3.4"
 StaticArrays = "1.7.0"
 ThreadsX = "0.1.11"
 YAML = "0.4.9"
-ThreeBodyDecays = "0.11, >=0.12.1"
 
 
 [extras]
