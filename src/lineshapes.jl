@@ -41,8 +41,8 @@ function (BW::BreitWignerMinL)(σ)
     ff_rk = BlattWeisskopf{minL}(dΛc)
     
     # Compensation factors
-    factor_l = (l == 2) ? 1/9 : 1
-    factor_minL = (minL == 2) ? 1/9 : 1
+    factor_l = (l == 2) ? 9 : 1
+    factor_minL = (minL == 2) ? 9 : 1
     
     # X component (lineshape without form factors)
     X = 1 / (m^2 - σ - 1im * m * Γ) * 
