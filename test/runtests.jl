@@ -73,8 +73,8 @@ end
     _names = model.names
     _HRk = getproperty.(model.chains, :HRk)
     _couplings = model.couplings
-    parameter_name(isobarname, recoupling) =
-        isobarname * "_{" * string(recoupling.two_λa) * ", " * string(recoupling.two_λb) * "}"
+    parameter_name(isobarname, vertex) =
+        isobarname * "_{" * string(vertex.h.two_λa) * ", " * string(vertex.h.two_λb) * "}"
 
     summary = parameter_name.(_names, _HRk) .=> _couplings
     @test summary isa Lc2ppiKSemileptonicModelLHCb.StaticArrays.SVector{N,T} where {N,T<:Pair{String,ComplexF64}}

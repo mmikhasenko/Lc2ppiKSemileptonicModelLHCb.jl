@@ -28,7 +28,7 @@ RecipesBase = "1.3.4"
 StaticArrays = "1.7.0"
 ThreadsX = "0.1.11"
 YAML = "0.4.9"
-ThreeBodyDecays = "0.11, 0.12"
+ThreeBodyDecays = "0.13"
 
 
 [extras]

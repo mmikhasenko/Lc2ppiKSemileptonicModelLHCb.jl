@@ -2,7 +2,7 @@
 
 julia_version = "1.11.5"
 manifest_format = "2.0"
-project_hash = "fbb12add4b7cc98bd122132bfd757c6cc6bb0f1e"
+project_hash = "6496ab9b68e215a381b37f499a092189248f5a96"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -278,10 +278,10 @@ uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 version = "1.0.3"
 
 [[deps.ThreeBodyDecays]]
-deps = ["Parameters", "PartialWaveFunctions", "PolynomialRoots", "Polynomials", "RecipesBase", "StaticArrays", "Tullio"]
-git-tree-sha1 = "a1c714fd6107b07384548411a36fa979273340b9"
+deps = ["Parameters", "PartialWaveFunctions", "PolynomialRoots", "Polynomials", "Random", "RecipesBase", "StaticArrays", "Tullio"]
+git-tree-sha1 = "6a9f51636bb28731e1ba1fc83a7e0d09b84bb70c"
 uuid = "e6563dab-9ca1-5843-bde3-2ccf38d63843"
-version = "0.12.3"
+version = "0.13.0"
 
 [[deps.Tullio]]
 deps = ["DiffRules", "LinearAlgebra", "Requires"]
