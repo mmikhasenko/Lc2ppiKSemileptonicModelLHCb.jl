@@ -60,7 +60,7 @@ function definechaininputs(key, dict)
                 minL=$minL,
                 m1=$(ms[i]), m2=$(ms[j]), mk=$(ms[k]), m0=$(ms[4]))
         end)
-    return (; k, Xlineshape, Hij, two_j, parity)
+    return (; k, Xlineshape, Hij, two_j, parity, minL)
 end
 
 

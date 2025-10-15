@@ -38,7 +38,6 @@ function (BW::BreitWignerMinL)(σ)
     
     # Form factors
     ff_ij = BlattWeisskopf{l}(dR)
-    ff_rk = BlattWeisskopf{minL}(dΛc)
     
     # Compensation factors
     factor_l = (l == 2) ? 9 : 1
@@ -51,9 +50,8 @@ function (BW::BreitWignerMinL)(σ)
     
     # Apply form factors
     FF_ij = ff_ij(p)
-    FF_Rk = ff_rk(q)
     
-    return FF_Rk * X * FF_ij
+    return X * FF_ij
 end
 
 # BuggBreitWignerMinL
