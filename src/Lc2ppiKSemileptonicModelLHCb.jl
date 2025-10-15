@@ -9,6 +9,7 @@ using Parameters
 using ThreeBodyDecays
 import ThreeBodyDecays: amplitude
 #
+using HadronicLineshapes
 using RecipesBase
 
 
