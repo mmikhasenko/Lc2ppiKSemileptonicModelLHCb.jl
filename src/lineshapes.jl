@@ -11,6 +11,7 @@ function F²(l, p, p0, d)
 end
 
 
+
 abstract type Lineshape end
 
 @with_kw struct BreitWignerMinL{T} <: Lineshape
@@ -34,8 +35,25 @@ function (BW::BreitWignerMinL)(σ)
     p, p0 = breakup(σ, m1^2, m2^2), breakup(m^2, m1^2, m2^2)
     q, q0 = breakup(m0^2, σ, mk^2), breakup(m0^2, m^2, mk^2)
     Γ = Γ₀ * (p / p0)^(2l + 1) * m / sqrt(σ) * F²(l, p, p0, dR)
-    1 / (m^2 - σ - 1im * m * Γ) * (p / p0)^l * (q / q0)^minL *
-    sqrt(F²(l, p, p0, dR) * F²(minL, q, q0, dΛc))
+    
+    # Form factors
+    ff_ij = BlattWeisskopf{l}(dR)
+    ff_rk = BlattWeisskopf{minL}(dΛc)
+    
+    # Compensation factors
+    factor_l = (l == 2) ? 1/9 : 1
+    factor_minL = (minL == 2) ? 1/9 : 1
+    
+    # X component (lineshape without form factors)
+    X = 1 / (m^2 - σ - 1im * m * Γ) * 
+        (1 / dR / p0)^l * (1 / dΛc / q0)^minL * 
+        sqrt(F²(l, 0, p0, dR) * F²(minL, 0, q0, dΛc) * factor_l * factor_minL)
+    
+    # Apply form factors
+    FF_ij = ff_ij(p)
+    FF_Rk = ff_rk(q)
+    
+    return FF_Rk * X * FF_ij
 end
 
 # BuggBreitWignerMinL
