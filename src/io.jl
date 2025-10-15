@@ -50,7 +50,7 @@ function definechaininputs(key, dict)
     only_two_ls = first(ls)
     l = div(only_two_ls[1], 2)
     #
-    Hij = VertexFunction(ParityRecoupling(two_js[i], two_js[j], reaction_ij), NoFormFactor())
+    Hij = VertexFunction(ParityRecoupling(two_js[i], two_js[j], reaction_ij), BlattWeisskopf{l}(1.5))
     Xlineshape = eval(
         quote
             $(Symbol(lineshape))(
