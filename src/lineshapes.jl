@@ -28,16 +28,15 @@ abstract type Lineshape end
 end
 BreitWignerMinL(pars::T; kw...) where {T} = BreitWignerMinL(; pars, kw...)
 function (BW::BreitWignerMinL)(σ)
-    dR, dΛc = 1.5, 5.0 # /GeV
-    m, Γ₀ = BW.pars
-    @unpack l, minL = BW
-    @unpack m1, m2, mk, m0 = BW
-    p, p0 = breakup(σ, m1^2, m2^2), breakup(m^2, m1^2, m2^2)
-    q, q0 = breakup(m0^2, σ, mk^2), breakup(m0^2, m^2, mk^2)
-    Γ = Γ₀ * (p / p0)^(2l + 1) * m / sqrt(σ) * F²(l, p, p0, dR)
-    # 
-    X = 1 / (m^2 - σ - 1im * m * Γ)    
-    return X
+    X = BreitWigner(;
+        BW.pars.m,
+        BW.pars.Γ,
+        ma = BW.m1,
+        mb = BW.m2,
+        BW.l,
+        d = 1.5
+    )
+    return X(σ)
 end
 
 # BuggBreitWignerMinL
