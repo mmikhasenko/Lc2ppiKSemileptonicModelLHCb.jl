@@ -133,6 +133,8 @@ function parse_model_dictionaries(modeldict; particledict)
     chains = getindex.(terms, 2)
     couplings = getindex.(terms, 1)
 
+    couplings .*= lineshape_mismatch.(chains)
+
     (; chains, couplings, isobarnames)
 end
 

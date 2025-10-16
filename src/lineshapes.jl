@@ -35,21 +35,8 @@ function (BW::BreitWignerMinL)(σ)
     p, p0 = breakup(σ, m1^2, m2^2), breakup(m^2, m1^2, m2^2)
     q, q0 = breakup(m0^2, σ, mk^2), breakup(m0^2, m^2, mk^2)
     Γ = Γ₀ * (p / p0)^(2l + 1) * m / sqrt(σ) * F²(l, p, p0, dR)
-    
-    # Compensation factors
-    mismatch = let
-        p0 = breakup(m^2, m1^2, m2^2)
-        q0 = breakup(m0^2, m^2, mk^2)
-        # 
-        factor_l = (l == 2) ? 9 : 1
-        factor_minL = (minL == 2) ? 9 : 1
-        1 / (dR * p0)^l * sqrt(F²(l, 0, p0, dR) * factor_l) * 
-            1 / (dΛc * q0)^minL * sqrt(F²(minL, 0, q0, dΛc) * factor_minL)
-    end
-
-    # X component (lineshape without form factors)
-    X = 1 / (m^2 - σ - 1im * m * Γ) * mismatch
-    
+    # 
+    X = 1 / (m^2 - σ - 1im * m * Γ)    
     return X
 end
 
