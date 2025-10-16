@@ -55,8 +55,8 @@ function lineshape_mismatch(dc::DecayChain)
     minL = orbital_momentum(dc.HRk.ff)
     # 
     dR, dΛc = 1.5, 5.0 # /GeV
-    @unpack pars, l = dc.Xlineshape
-    @unpack m = pars
+    @unpack l = dc.Xlineshape
+    m = dc.Xlineshape isa BreitWigner ? dc.Xlineshape.m : dc.Xlineshape.pars.m
 
     ms = masses(dc)
     @unpack k = dc

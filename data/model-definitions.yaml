@@ -1,16 +1,16 @@
 Default amplitude model:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
     K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
+    K(892): BreitWigner
     K(1430): BuggBreitWignerMinL
   parameters:
     # central value  ± Hesse ± model ± systematic
@@ -77,16 +77,16 @@ Default amplitude model:
 Alternative amplitude model with K(892) with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
     K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
+    K(892): BreitWigner
     K(1430): BuggBreitWignerMinL
   parameters:
     ArK(892)1: 1.0 ± 0.0

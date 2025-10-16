@@ -51,15 +51,34 @@ function definechaininputs(key, dict)
     l = div(only_two_ls[1], 2)
     #
     Hij = VertexFunction(ParityRecoupling(two_js[i], two_js[j], reaction_ij), BlattWeisskopf{l}(1.5))
-    Xlineshape = eval(
-        quote
-            $(Symbol(lineshape))(
-                (; m=$massval, Γ=$widthval);
-                name=$key,
-                l=$l,
-                minL=$minL,
-                m1=$(ms[i]), m2=$(ms[j]), mk=$(ms[k]), m0=$(ms[4]))
-        end)
+    # 
+    ma_val = dict["ma"] / 1000
+    mb_val = dict["mb"] / 1000
+    d_val = dict["d"]
+    # 
+    if lineshape == "BreitWigner"
+        Xlineshape_symb = 
+            quote
+                $(Symbol(lineshape))(
+                    ; m=$massval, Γ=$widthval,
+                    l=$l,
+                    ma=$ma_val,
+                    mb=$mb_val,
+                    d=$d_val)
+            end
+    else
+        Xlineshape_symb = 
+            quote
+                $(Symbol(lineshape))(
+                    (; m=$massval, Γ=$widthval);
+                    name=$key,
+                    l=$l,
+                    minL=$minL,
+                    m1=$(ms[i]), m2=$(ms[j]), mk=$(ms[k]), m0=$(ms[4]))
+        end
+    end
+    Xlineshape = Xlineshape_symb |> eval
+    # 
     return (; k, Xlineshape, Hij, two_j, parity, minL)
 end
 
@@ -110,7 +129,7 @@ function parse_model_dictionaries(modeldict; particledict)
     for (p, u) in parameterupdates
         BW = isobars[p].Xlineshape
         isobars[p] = merge(isobars[p],
-            (Xlineshape=updatepars(BW, merge(BW.pars, u)),))
+            (Xlineshape=updatepars(BW, u),))
     end
 
     # 3) get couplings

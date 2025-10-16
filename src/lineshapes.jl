@@ -91,13 +91,21 @@ function (BW::Flatte1405)(σ)
 end
 
 
-function updatepars(BW::Lineshape, pars)
+function updatepars(BW, u)
+    pars = merge(BW.pars, u)
     fiels = fieldnames(typeof(BW))
     values = [getproperty(BW, f) for f in fiels]
     return typeof(BW)(; NamedTuple{fiels}(values)..., pars)
 end
 
 
+function updatepars(BW::T, pars) where T<:BreitWigner
+    fiels = fieldnames(typeof(BW))
+    values = [getproperty(BW, f) for f in fiels]
+    old_pars = NamedTuple{fiels}(values)
+    new_pars = (; old_pars..., pars...)
+    return typeof(BW)(; new_pars...)
+end
 
 @recipe function f(BW::Lineshape)
     xv = range((BW.m1 + BW.m2)^2, (BW.m0 - BW.mk)^2, length=300)
