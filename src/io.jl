@@ -66,6 +66,14 @@ function definechaininputs(key, dict)
                     mb=$mb_val,
                     d=$d_val)
             end
+    elseif lineshape == "Flatte1405"
+        Xlineshape_symb = 
+            quote
+                $(Symbol(lineshape))(
+                    ; m=$massval, Γ=$widthval,
+                    ma=$ma_val,
+                    mb=$mb_val)
+            end
     else
         Xlineshape_symb = 
             quote

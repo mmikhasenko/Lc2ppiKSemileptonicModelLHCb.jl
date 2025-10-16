@@ -65,29 +65,23 @@ function (BW::BuggBreitWignerMinL)(σ)
 end
 
 # Flatte1405
-@with_kw struct Flatte1405{T} <: Lineshape
-    pars::T
-    l::Int
-    minL::Int
+@with_kw struct Flatte1405 <: Lineshape
+    m::Float64
+    Γ::Float64
     #
-    name::String
-    #
-    m1::Float64
-    m2::Float64
-    mk::Float64
-    m0::Float64
+    ma::Float64
+    mb::Float64
 end
 #
-Flatte1405(pars::T; kw...) where {T} = Flatte1405(; pars, kw...)
+# Flatte1405(pars::T; kw...) where {T} = Flatte1405(; pars, kw...)
 function (BW::Flatte1405)(σ)
-    m, Γ₀ = BW.pars
-    @unpack m1, m2, m0, mk = BW
-    p, p0 = breakup(σ, m1^2, m2^2), breakup(m^2, mπ^2, mΣ^2)
+    @unpack m, Γ, ma, mb = BW
+    p, p0 = breakup(σ, ma^2, mb^2), breakup(m^2, mπ^2, mΣ^2)
     p′, p0′ = breakup(σ, mπ^2, mΣ^2), breakup(m^2, mπ^2, mΣ^2)
-    Γ1 = Γ₀ * (p / p0) * m / sqrt(σ)
-    Γ2 = Γ₀ * (p′ / p0′) * m / sqrt(σ)
-    Γ = Γ1 + Γ2
-    1 / (m^2 - σ - 1im * m * Γ)
+    Γ1 = Γ * (p / p0) * m / sqrt(σ)
+    Γ2 = Γ * (p′ / p0′) * m / sqrt(σ)
+    Γ_tot = Γ1 + Γ2
+    1 / (m^2 - σ - 1im * m * Γ_tot)
 end
 
 
