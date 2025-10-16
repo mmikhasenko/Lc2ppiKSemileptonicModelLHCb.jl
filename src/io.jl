@@ -10,29 +10,14 @@ function writejson(path, obj)
     end
 end
 
-"""
-    ifhyphenaverage(s::String)
-
-The function treats the shape-parameter fields in the particle-description file.
-If range is provided, it averages the limits.
-"""
-function ifhyphenaverage(s::String)
-    factor = findfirst('-', s) === nothing ? 1 : 2
-    eval(Meta.parse(replace(s, '-' => '+'))) / factor
-end
-ifhyphenaverage(v::Number) = v
-
-
 function definechaininputs(key, dict)
-    @unpack mass, width, lineshape = dict
+    @unpack mass, width, lineshape, l = dict
     #
     k = Dict('K' => 1, 'D' => 3, 'L' => 2)[first(key)]
     #
     jp_R = str2jp(dict["jp"])
     parity = jp_R.p
     two_j = jp_R.two_j
-    #
-    massval, widthval = ifhyphenaverage.((mass, width)) ./ 1e3
     #
     i, j = ij_from_k(k)
     #
@@ -45,52 +30,47 @@ function definechaininputs(key, dict)
     minLS = first(sort(vcat(two_LS...); by=x -> x[1]))
     minL = div(minLS[1], 2)
     #
-    ls = possible_ls(reaction_ij)
-    length(ls) != 1 && error("expected the only ls: $(ls)")
-    only_two_ls = first(ls)
-    l = div(only_two_ls[1], 2)
-    #
     Hij = VertexFunction(ParityRecoupling(two_js[i], two_js[j], reaction_ij), BlattWeisskopf{l}(1.5))
     # 
-    ma_val = dict["ma"] / 1000
-    mb_val = dict["mb"] / 1000
-    d_val = dict["d"]
-    # 
-    if lineshape == "BreitWigner"
-        Xlineshape_symb = 
-            quote
-                $(Symbol(lineshape))(
-                    ; m=$massval, Γ=$widthval,
-                    l=$l,
-                    ma=$ma_val,
-                    mb=$mb_val,
-                    d=$d_val)
-            end
-    elseif lineshape == "Flatte1405"
-        Xlineshape_symb = 
-            quote
-                $(Symbol(lineshape))(
-                    ; m=$massval, Γ=$widthval,
-                    ma=$ma_val,
-                    mb=$mb_val)
-            end
-    else
-        Xlineshape_symb = 
-            quote
-                $(Symbol(lineshape))(
-                    (; m=$massval, Γ=$widthval);
-                    name=$key,
-                    l=$l,
-                    minL=$minL,
-                    m1=$(ms[i]), m2=$(ms[j]), mk=$(ms[k]), m0=$(ms[4]))
-        end
-    end
-    Xlineshape = Xlineshape_symb |> eval
-    # 
+    Xlineshape = build_lineshape(lineshape |> Symbol |> eval, dict)
     return (; k, Xlineshape, Hij, two_j, parity, minL)
 end
 
-
+function build_lineshape(::Type{BreitWigner}, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    ma = dict["ma"] / 1000
+    mb = dict["mb"] / 1000
+    l = dict["l"]
+    d = dict["d"]
+    return BreitWigner(; m, Γ, ma, mb, l, d)
+end
+function build_lineshape(::Type{Flatte1405}, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    ma = dict["ma"] / 1000
+    mb = dict["mb"] / 1000
+    return Flatte1405(; m, Γ, ma, mb)
+end
+function build_lineshape(anytype, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    ma = dict["ma"] / 1000
+    mb = dict["mb"] / 1000
+    l_fake = 1
+    minL_fake = 1
+    mk_fake = 0.1
+    m0_fake = 0.1
+    key = "fake_name"
+    # 
+    return quote $(Symbol(anytype))(
+        (; m=$m, Γ=$Γ);
+        name=$key,
+        l=$(l_fake),
+        minL=$(minL_fake),
+        m1=$(ma), m2=$(mb), mk=$(mk_fake), m0=$(m0_fake)) 
+    end |> eval
+end
 
 # shape parameters
 function parseshapedparameter(parname)
