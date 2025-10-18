@@ -1,15 +1,6 @@
 
 breakup(m², m1², m2²) = sqrtKallenFact(sqrt(m²), sqrt(m1²), sqrt(m2²)) / (2 * sqrt(m²))
 
-function F²(l, p, p0, d)
-    pR = p * d
-    p0R = p0 * d
-    l == 0 && return 1.0
-    l == 1 && return (1 + p0R^2) / (1 + pR^2)
-    l != 2 && error("l>2 cannot be")
-    return (9 + 3p0R^2 + p0R^4) / (9 + 3pR^2 + pR^4)
-end
-
 @with_kw struct BuggBreitWigner
     m::Float64
     Γ::Float64
@@ -43,6 +34,9 @@ function (BW::Flatte1405)(σ)
     Γ_tot = Γ1 + Γ2
     1 / (m^2 - σ - 1im * m * Γ_tot)
 end
+
+
+# updatepars
 
 function updatepars(BW::T, pars) where T<:BuggBreitWigner
     fiels = fieldnames(typeof(BW))
