@@ -56,19 +56,19 @@ end
 
 
 
-# @testset "Exact values of amplitude and intensity" begin
-#     @test _I ≈ 9345.853380852352
-#     @test _A ≈ -45.1323269502508 + 54.85942516648639im
-#     # 
-#     @test model.chains[1].Xlineshape(σs0.σ2) ≈
-#           model.chains[2].Xlineshape(σs0.σ2) ≈ -0.5636481410171861 + 0.13763637759224928im
-#     # 
-#     @test model.chains[21].Xlineshape(σs0.σ1) ≈
-#           model.chains[22].Xlineshape(σs0.σ1) ≈
-#           model.chains[23].Xlineshape(σs0.σ1) ≈
-#           model.chains[24].Xlineshape(σs0.σ1) ≈ 2.1687201455088894 + 23.58225917009096im
+@testset "Exact values of amplitude and intensity" begin
+    @test _I ≈ 9345.853380852352
+    @test _A ≈ -45.1323269502508 + 54.85942516648639im
+    # 
+    # @test model.chains[1].Xlineshape(σs0.σ2) ≈
+    #       model.chains[2].Xlineshape(σs0.σ2) ≈ -0.5636481410171861 + 0.13763637759224928im
+    # # 
+    # @test model.chains[21].Xlineshape(σs0.σ1) ≈
+    #       model.chains[22].Xlineshape(σs0.σ1) ≈
+    #       model.chains[23].Xlineshape(σs0.σ1) ≈
+    #       model.chains[24].Xlineshape(σs0.σ1) ≈ 2.1687201455088894 + 23.58225917009096im
 
-# end
+end
 
 @testset "Parameters and couplings" begin
     _names = model.names
