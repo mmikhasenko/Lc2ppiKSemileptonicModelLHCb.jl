@@ -100,9 +100,7 @@ end
     list_of_models_but_few = filter(list_of_models) do x
         x != "Alternative amplitude model obtained using LS couplings" &&
             # requires reading d and replacing
-            x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc" &&
-            # requires reading flatte coupkings
-            x != "Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)"
+            x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc"
     end
     @test map(list_of_models_but_few) do modelname
         # @show modelname

@@ -11,7 +11,7 @@ function writejson(path, obj)
 end
 
 function definechaininputs(key, dict)
-    @unpack mass, width, lineshape, l = dict
+    @unpack mass, lineshape, l = dict
     #
     k = Dict('K' => 1, 'D' => 3, 'L' => 2)[first(key)]
     #
@@ -47,10 +47,11 @@ function build_lineshape(::Type{BreitWigner}, dict)
 end
 function build_lineshape(::Type{Flatte1405}, dict)
     m = dict["mass"] / 1000
-    Γ = dict["width"] / 1000
+    Γ1 = dict["G1"] / 1000
+    Γ2 = dict["G2"] / 1000
     ma = dict["ma"] / 1000
     mb = dict["mb"] / 1000
-    return Flatte1405(; m, Γ, ma, mb)
+    return Flatte1405(; m, Γ1, Γ2, ma, mb)
 end
 function build_lineshape(::Type{BuggBreitWigner}, dict)
     m = dict["mass"] / 1000
@@ -67,7 +68,7 @@ function build_lineshape(::Type{BuggBreitWignerExpFF}, dict)
 end
 # shape parameters
 function parseshapedparameter(par_name)
-    keytemp = r"([M,G]|gamma|alpha)"
+    keytemp = r"([M,G]|G[12]|gamma|alpha)"
     nametemp = r"([L,K,D]\([0-9]*\))"
     m = match(keytemp * nametemp, par_name)
     m === nothing && error("The name of the shared parameter, $(par_name), is not recognized!")
@@ -77,6 +78,8 @@ end
 function keyname2symbol(key)
     key == "M" && return :m
     key == "G" && return :Γ
+    key == "G1" && return :Γ1
+    key == "G2" && return :Γ2
     key == "gamma" && return :γ
     key == "alpha" && return :α
     error("The name of the shared parameter, $(key), is not recognized!")
