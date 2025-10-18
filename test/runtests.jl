@@ -48,7 +48,7 @@ _I = unpolarized_intensity(model, σs0)
 _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, helicity values
 
 
-@testset "Evaluation of the meeting" begin
+@testset "Amplitude and intensity can be computed" begin
     @test _I isa Real
     @test _A isa Complex
     @test _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0=1))
