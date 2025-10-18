@@ -93,32 +93,21 @@ end
 
 
 @testset "Alternative models" begin
+# let
     list_of_models = keys(modelparameters) |> collect
     # exclude the last one, which is the LS model
     # it cannot be loaded, not implemented
     list_of_models_but_few = filter(list_of_models) do x
         x != "Alternative amplitude model obtained using LS couplings" &&
+            # requires new lineshape
             x != "Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''" &&
+            # requires reading d and replacing
             x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc" &&
+            # requires reading flatte coupkings
             x != "Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)"
     end
-    map(list_of_models_but_few) do modelname
-        @show modelname
-        @test published_model(modelname) isa ThreeBodyDecay
+    @test map(list_of_models_but_few) do modelname
+        # @show modelname
+        published_model(modelname) isa ThreeBodyDecay
     end |> all
-end
-
-# failing test
-published_model("Alternative amplitude model with K(1410) contribution added with mass and width from PDG2020")
-
-let
-    modelname = "Alternative amplitude model with K(1410) contribution added with mass and width from PDG2020"
-    # 
-    (; modelparameters, particledict) = expose_model_description()
-    defaultparameters = modelparameters[modelname]
-    (; chains, couplings, isobarnames) =
-        parse_model_dictionaries(defaultparameters; particledict)
-    model = Lc2ppiKModel(; chains, couplings, isobarnames)
-    # 
-    return model
 end

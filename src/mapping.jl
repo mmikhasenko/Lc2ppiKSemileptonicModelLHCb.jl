@@ -63,11 +63,18 @@ function lineshape_mismatch(dc::DecayChain)
     i,j = ij_from_k(k)
     mi, mj, mk = ms[i], ms[j], ms[k]
     m0 = ms[4]
-    # 
-    p0 = breakup(m^2, mi^2, mj^2)
-    q0 = breakup(m0^2, m^2, mk^2)
     #
-    1 / BlattWeisskopf{l}(dR)(p0) / BlattWeisskopf{minL}(dΛc)(q0)
+    matching_factor = one(m)
+    if l != 0
+        p0 = breakup(m^2, mi^2, mj^2)
+        matching_factor *= 1 / BlattWeisskopf{l}(dR)(p0)
+    end
+    if minL != 0
+        m > m0-mk && @warn "m > m0-mk: using q0 for normalization is illegal, prepare for failure!"
+        q0 = breakup(m0^2, m^2, mk^2)
+        matching_factor *= 1 / BlattWeisskopf{minL}(dΛc)(q0)
+    end
+    return matching_factor
 end
 
 """
