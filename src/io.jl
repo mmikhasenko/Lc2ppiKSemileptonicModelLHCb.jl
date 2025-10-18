@@ -58,26 +58,6 @@ function build_lineshape(::Type{BuggBreitWigner}, dict)
     γ = dict["gamma"]
     return BuggBreitWigner(; m, Γ, γ)
 end
-function build_lineshape(anytype, dict)
-    @show anytype
-    m = dict["mass"] / 1000
-    Γ = dict["width"] / 1000
-    ma = dict["ma"] / 1000
-    mb = dict["mb"] / 1000
-    l_fake = 1
-    minL_fake = 1
-    mk_fake = 0.1
-    m0_fake = 0.1
-    key = "fake_name"
-    # 
-    return quote $(Symbol(anytype))(
-        (; m=$m, Γ=$Γ);
-        name=$key,
-        l=$(l_fake),
-        minL=$(minL_fake),
-        m1=$(ma), m2=$(mb), mk=$(mk_fake), m0=$(m0_fake)) 
-    end |> eval
-end
 
 # shape parameters
 function parseshapedparameter(par_name)
