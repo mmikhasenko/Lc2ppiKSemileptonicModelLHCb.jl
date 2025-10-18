@@ -44,14 +44,6 @@ function (BW::Flatte1405)(σ)
     1 / (m^2 - σ - 1im * m * Γ_tot)
 end
 
-
-function updatepars(BW, u)
-    pars = merge(BW.pars, u)
-    fiels = fieldnames(typeof(BW))
-    values = [getproperty(BW, f) for f in fiels]
-    return typeof(BW)(; NamedTuple{fiels}(values)..., pars)
-end
-
 function updatepars(BW::T, pars) where T<:BuggBreitWigner
     fiels = fieldnames(typeof(BW))
     values = [getproperty(BW, f) for f in fiels]

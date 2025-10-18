@@ -66,11 +66,8 @@ function lineshape_mismatch(dc::DecayChain)
     # 
     p0 = breakup(m^2, mi^2, mj^2)
     q0 = breakup(m0^2, m^2, mk^2)
-    # 
-    factor_l = (l == 2) ? 9 : 1
-    factor_minL = (minL == 2) ? 9 : 1
-    1 / (dR * p0)^l * sqrt(F²(l, 0, p0, dR) * factor_l) * 
-        1 / (dΛc * q0)^minL * sqrt(F²(minL, 0, q0, dΛc) * factor_minL)
+    #
+    1 / BlattWeisskopf{l}(dR)(p0) / BlattWeisskopf{minL}(dΛc)(q0)
 end
 
 """
