@@ -99,8 +99,6 @@ end
     # it cannot be loaded, not implemented
     list_of_models_but_few = filter(list_of_models) do x
         x != "Alternative amplitude model obtained using LS couplings" &&
-            # requires new lineshape
-            x != "Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''" &&
             # requires reading d and replacing
             x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc" &&
             # requires reading flatte coupkings
@@ -110,4 +108,10 @@ end
         # @show modelname
         published_model(modelname) isa ThreeBodyDecay
     end |> all
+end
+
+@testset "alpha is read correctly" begin
+    m = published_model("Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''")
+    @test all(map(x->x.Xlineshape.α, m[m.names .== "K(1430)"].chains) .== 0.320379)
+    @test all(map(x->x.Xlineshape.α, m[m.names .== "K(700)"].chains) .== -0.444257)
 end

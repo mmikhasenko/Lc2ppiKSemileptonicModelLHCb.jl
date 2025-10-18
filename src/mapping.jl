@@ -50,6 +50,7 @@ end
 
 lineshape_mismatch(dc::DecayChain{<:Flatte1405}) = 1.0
 lineshape_mismatch(dc::DecayChain{<:BuggBreitWigner}) = 1.0
+lineshape_mismatch(dc::DecayChain{<:BuggBreitWignerExpFF}) = 1.0
 
 function lineshape_mismatch(dc::DecayChain)
     minL = orbital_momentum(dc.HRk.ff)

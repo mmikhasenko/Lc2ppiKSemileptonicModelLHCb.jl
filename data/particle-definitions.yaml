@@ -154,6 +154,7 @@ K(700):
   l: 0
   d: 1.5
   gamma: 0.2
+  alpha: -0.45
 
 K(892):
   latex: K(892)
@@ -185,6 +186,7 @@ K(1430):
   l: 0
   d: 1.5
   gamma: 0.2
+  alpha: 0.32
 
 # https://github.com/ComPWA/polarimetry/blob/34f5330/julia/notebooks/model0.jl#L43-L47
 Sigma-:

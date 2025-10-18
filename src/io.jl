@@ -58,7 +58,13 @@ function build_lineshape(::Type{BuggBreitWigner}, dict)
     γ = dict["gamma"]
     return BuggBreitWigner(; m, Γ, γ)
 end
-
+function build_lineshape(::Type{BuggBreitWignerExpFF}, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    γ = dict["gamma"]
+    α = dict["alpha"]
+    return BuggBreitWignerExpFF(; m, Γ, γ, α)
+end
 # shape parameters
 function parseshapedparameter(par_name)
     keytemp = r"([M,G]|gamma|alpha)"
