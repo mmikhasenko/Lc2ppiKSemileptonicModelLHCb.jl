@@ -52,7 +52,14 @@ function build_lineshape(::Type{Flatte1405}, dict)
     mb = dict["mb"] / 1000
     return Flatte1405(; m, Γ, ma, mb)
 end
+function build_lineshape(::Type{BuggBreitWigner}, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    γ = dict["gamma"]
+    return BuggBreitWigner(; m, Γ, γ)
+end
 function build_lineshape(anytype, dict)
+    @show anytype
     m = dict["mass"] / 1000
     Γ = dict["width"] / 1000
     ma = dict["ma"] / 1000

@@ -60,9 +60,24 @@ function (BW::BuggBreitWignerMinL)(σ)
     σA = mK^2 - mπ^2 / 2
     m, Γ₀, γ = BW.pars
     @unpack m1, m2 = BW
-    Γ = (σ - σA) / (m^2 - σA) * Γ₀ * exp(-γ * σ)# * breakup(σ,m1^2,m2^2)/(2*sqrt(σ))
+    Γ = (σ - σA) / (m^2 - σA) * Γ₀ * exp(-γ * σ)
     1 / (m^2 - σ - 1im * m * Γ)
 end
+
+
+@with_kw struct BuggBreitWigner <: Lineshape
+    m::Float64
+    Γ::Float64
+    γ::Float64
+end
+#
+function (BW::BuggBreitWigner)(σ)
+    σA = mK^2 - mπ^2 / 2
+    @unpack m, Γ, γ = BW
+    Γ_dep = (σ - σA) / (m^2 - σA) * Γ * exp(-γ * σ)
+    1 / (m^2 - σ - 1im * m * Γ_dep)
+end
+
 
 # Flatte1405
 @with_kw struct Flatte1405 <: Lineshape
@@ -92,6 +107,13 @@ function updatepars(BW, u)
     return typeof(BW)(; NamedTuple{fiels}(values)..., pars)
 end
 
+function updatepars(BW::T, pars) where T<:BuggBreitWigner
+    fiels = fieldnames(typeof(BW))
+    values = [getproperty(BW, f) for f in fiels]
+    old_pars = NamedTuple{fiels}(values)
+    new_pars = (; old_pars..., pars...)
+    return typeof(BW)(; new_pars...)
+end
 
 function updatepars(BW::T, pars) where T<:BreitWigner
     fiels = fieldnames(typeof(BW))

@@ -49,7 +49,7 @@ function couplingLHCb2DPD(two_λR, two_λk; k, parity, two_j)
 end
 
 lineshape_mismatch(dc::DecayChain{<:Flatte1405}) = 1.0
-lineshape_mismatch(dc::DecayChain{<:BuggBreitWignerMinL}) = 1.0
+lineshape_mismatch(dc::DecayChain{<:BuggBreitWigner}) = 1.0
 
 function lineshape_mismatch(dc::DecayChain)
     minL = orbital_momentum(dc.HRk.ff)

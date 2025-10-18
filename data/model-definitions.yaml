@@ -9,9 +9,9 @@ Default amplitude model:
     D(1232): BreitWigner
     D(1600): BreitWigner
     D(1700): BreitWigner
-    K(700): BuggBreitWignerMinL
+    K(700): BuggBreitWigner
     K(892): BreitWigner
-    K(1430): BuggBreitWignerMinL
+    K(1430): BuggBreitWigner
   parameters:
     # central value  ± Hesse ± model ± systematic
     #      supplementary     +     Table 8
