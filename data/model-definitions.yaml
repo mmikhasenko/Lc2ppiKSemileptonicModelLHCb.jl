@@ -85,9 +85,9 @@ Alternative amplitude model with K(892) with free mass and width:
     D(1232): BreitWigner
     D(1600): BreitWigner
     D(1700): BreitWigner
-    K(700): BuggBreitWignerMinL
+    K(700): BuggBreitWigner
     K(892): BreitWigner
-    K(1430): BuggBreitWignerMinL
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -153,17 +153,17 @@ Alternative amplitude model with K(892) with free mass and width:
 Alternative amplitude model with L(1670) with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -229,17 +229,17 @@ Alternative amplitude model with L(1670) with free mass and width:
 Alternative amplitude model with L(1690) with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -305,17 +305,17 @@ Alternative amplitude model with L(1690) with free mass and width:
 Alternative amplitude model with D(1232) with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -381,17 +381,17 @@ Alternative amplitude model with D(1232) with free mass and width:
 Alternative amplitude model with L(1600), D(1600), D(1700) with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -461,17 +461,17 @@ Alternative amplitude model with L(1600), D(1600), D(1700) with free mass and wi
 Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi):
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -537,18 +537,18 @@ Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (p
 Alternative amplitude model with L(1800) contribution added with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(1800): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(1800): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -616,18 +616,18 @@ Alternative amplitude model with L(1800) contribution added with free mass and w
 Alternative amplitude model with L(1810) contribution added with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(1810): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(1810): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -697,18 +697,18 @@ Alternative amplitude model with L(1810) contribution added with free mass and w
 Alternative amplitude model with D(1620) contribution added with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1620): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1620): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -778,17 +778,17 @@ Alternative amplitude model with D(1620) contribution added with free mass and w
 Alternative amplitude model in which a Relativistic Breit-Wigner is used for the K(700) contribution:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -851,17 +851,17 @@ Alternative amplitude model in which a Relativistic Breit-Wigner is used for the
 Alternative amplitude model with K(700) with free mass and width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -927,18 +927,18 @@ Alternative amplitude model with K(700) with free mass and width:
 Alternative amplitude model with K(1410) contribution added with mass and width from PDG2020:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1410): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1410): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -1010,17 +1010,17 @@ Alternative amplitude model with K(1410) contribution added with mass and width 
 Alternative amplitude model in which a Relativistic Breit-Wigner is used for the K(1430) contribution:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -1083,17 +1083,17 @@ Alternative amplitude model in which a Relativistic Breit-Wigner is used for the
 Alternative amplitude model with K(1430) with free width:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -1158,16 +1158,16 @@ Alternative amplitude model with K(1430) with free width:
 Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha'':
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
     K(700): BuggBreitWignerExpFF
-    K(892): BreitWignerMinL
+    K(892): BreitWigner
     K(1430): BuggBreitWignerExpFF
   parameters:
     ArK(892)1: 1.0 ± 0.0
@@ -1234,17 +1234,17 @@ Alternative amplitude model with an additional overall exponential form factor e
 Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc:
   lineshapes:
     L(1405): Flatte1405
-    L(1520): BreitWignerMinL
-    L(1600): BreitWignerMinL
-    L(1670): BreitWignerMinL
-    L(1690): BreitWignerMinL
-    L(2000): BreitWignerMinL
-    D(1232): BreitWignerMinL
-    D(1600): BreitWignerMinL
-    D(1700): BreitWignerMinL
-    K(700): BuggBreitWignerMinL
-    K(892): BreitWignerMinL
-    K(1430): BuggBreitWignerMinL
+    L(1520): BreitWigner
+    L(1600): BreitWigner
+    L(1670): BreitWigner
+    L(1690): BreitWigner
+    L(2000): BreitWigner
+    D(1232): BreitWigner
+    D(1600): BreitWigner
+    D(1700): BreitWigner
+    K(700): BuggBreitWigner
+    K(892): BreitWigner
+    K(1430): BuggBreitWigner
   parameters:
     ArK(892)1: 1.0 ± 0.0
     AiK(892)1: 0.0 ± 0.0
@@ -1309,17 +1309,17 @@ Alternative amplitude model with free radial parameter d for the Lc resonance, i
 Alternative amplitude model obtained using LS couplings:
   lineshapes:
     L(1405): Flatte1405_LS
-    L(1520): BreitWignerMinL_LS
-    L(1600): BreitWignerMinL_LS
-    L(1670): BreitWignerMinL_LS
-    L(1690): BreitWignerMinL_LS
-    L(2000): BreitWignerMinL_LS
-    D(1232): BreitWignerMinL_LS
-    D(1600): BreitWignerMinL_LS
-    D(1700): BreitWignerMinL_LS
-    K(700): BuggBreitWignerMinL_LS
-    K(892): BreitWignerMinL_LS
-    K(1430): BuggBreitWignerMinL_LS
+    L(1520): BreitWigner_LS
+    L(1600): BreitWigner_LS
+    L(1670): BreitWigner_LS
+    L(1690): BreitWigner_LS
+    L(2000): BreitWigner_LS
+    D(1232): BreitWigner_LS
+    D(1600): BreitWigner_LS
+    D(1700): BreitWigner_LS
+    K(700): BuggBreitWigner_LS
+    K(892): BreitWigner_LS
+    K(1430): BuggBreitWigner_LS
   parameters:
     gammaK(700): 0.847475 ± 0.038013
     gammaK(1430): 0.022335 ± 0.010936

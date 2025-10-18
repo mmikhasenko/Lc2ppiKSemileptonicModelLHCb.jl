@@ -10,8 +10,8 @@ The file provides the description of the characteristics and parameters of the r
 
 There are three lineshape types:
 
-- `"BreitWignerMinL"`: the standard parametrization with isobar spectator orbital momentum set to its minimal value
-- `"BuggBreitWignerMinL"`: the mass-dependent width incorporates Adler zero and exponential form factor
+- `"BreitWigner"`: the standard parametrization with isobar spectator orbital momentum set to its minimal value
+- `"BuggBreitWigner"`: the mass-dependent width incorporates Adler zero and exponential form factor
 - `"Flatte1405"`: the mass-dependent width includes two terms, pK and Sigma pi with the same Gamma0
 
 For most of the resonances, the width field gives a fixed value. However, for a few, an interval is provided. In that case, the width was a parameter of the fit. Its exact value is to be found in the list of parameters

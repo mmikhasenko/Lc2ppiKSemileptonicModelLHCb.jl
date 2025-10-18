@@ -18,8 +18,8 @@ include("kinematics.jl")
 
 
 export Lineshape
-export BreitWignerMinL
-export BuggBreitWignerMinL
+export BreitWigner
+export BuggBreitWigner
 export Flatte1405
 export updatepars
 include("lineshapes.jl")

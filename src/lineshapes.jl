@@ -10,62 +10,7 @@ function F²(l, p, p0, d)
     return (9 + 3p0R^2 + p0R^4) / (9 + 3pR^2 + pR^4)
 end
 
-
-
-abstract type Lineshape end
-
-@with_kw struct BreitWignerMinL{T} <: Lineshape
-    pars::T
-    l::Int
-    minL::Int
-    #
-    name::String
-    #
-    m1::Float64
-    m2::Float64
-    mk::Float64
-    m0::Float64
-end
-BreitWignerMinL(pars::T; kw...) where {T} = BreitWignerMinL(; pars, kw...)
-function (BW::BreitWignerMinL)(σ)
-    X = BreitWigner(;
-        BW.pars.m,
-        BW.pars.Γ,
-        ma = BW.m1,
-        mb = BW.m2,
-        BW.l,
-        d = 1.5
-    )
-    return X(σ)
-end
-
-# BuggBreitWignerMinL
-@with_kw struct BuggBreitWignerMinL{T} <: Lineshape
-    pars::T
-    l::Int
-    minL::Int
-    #
-    name::String
-    #
-    m1::Float64
-    m2::Float64
-    mk::Float64
-    m0::Float64
-end
-BuggBreitWignerMinL(pars::T; kw...) where {
-    T<:NamedTuple{X,Tuple{Float64,Float64}}} where {X} =
-    BuggBreitWignerMinL(; pars=merge(pars, (γ=1.1,)), kw...)
-#
-function (BW::BuggBreitWignerMinL)(σ)
-    σA = mK^2 - mπ^2 / 2
-    m, Γ₀, γ = BW.pars
-    @unpack m1, m2 = BW
-    Γ = (σ - σA) / (m^2 - σA) * Γ₀ * exp(-γ * σ)
-    1 / (m^2 - σ - 1im * m * Γ)
-end
-
-
-@with_kw struct BuggBreitWigner <: Lineshape
+@with_kw struct BuggBreitWigner
     m::Float64
     Γ::Float64
     γ::Float64
@@ -80,7 +25,7 @@ end
 
 
 # Flatte1405
-@with_kw struct Flatte1405 <: Lineshape
+@with_kw struct Flatte1405
     m::Float64
     Γ::Float64
     #
@@ -121,13 +66,4 @@ function updatepars(BW::T, pars) where T<:BreitWigner
     old_pars = NamedTuple{fiels}(values)
     new_pars = (; old_pars..., pars...)
     return typeof(BW)(; new_pars...)
-end
-
-@recipe function f(BW::Lineshape)
-    xv = range((BW.m1 + BW.m2)^2, (BW.m0 - BW.mk)^2, length=300)
-    intensity(σ) = abs2(BW(σ)) *
-                   breakup(σ, BW.m1^2, BW.m2^2) *
-                   breakup(BW.m0^2, σ, BW.mk^2) / sqrt(σ)
-    yv = intensity.(xv)
-    (xv, yv ./ sum(yv) .* length(yv))
 end
