@@ -80,11 +80,11 @@ function build_lineshape(anytype, dict)
 end
 
 # shape parameters
-function parseshapedparameter(parname)
+function parseshapedparameter(par_name)
     keytemp = r"([M,G]|gamma|alpha)"
     nametemp = r"([L,K,D]\([0-9]*\))"
-    m = match(keytemp * nametemp, parname)
-    m === nothing && error("The name of the shared parameter, $(parname), is not recognized!")
+    m = match(keytemp * nametemp, par_name)
+    m === nothing && error("The name of the shared parameter, $(par_name), is not recognized!")
     return (key=m[1], isobarname=m[2])
 end
 
@@ -96,8 +96,8 @@ function keyname2symbol(key)
     error("The name of the shared parameter, $(key), is not recognized!")
 end
 
-function replacementpair(parname, val)
-    @unpack key, isobarname = parseshapedparameter(parname)
+function replacementpair(par_name, val)
+    @unpack key, isobarname = parseshapedparameter(par_name)
     s = keyname2symbol(key)
     v = MeasuredParameter(val).val
     isobarname => eval(:(NamedTuple{($(QuoteNode(s)),)}($(v))))
@@ -118,8 +118,8 @@ function parse_model_dictionaries(modeldict; particledict)
     defaultparameters = modeldict["parameters"]
     shapeparameters = filter(x -> x[1] != 'A', keys(defaultparameters))
     parameterupdates = [
-        replacementpair(parname, defaultparameters[parname])
-        for parname in shapeparameters]
+        replacementpair(par_name, defaultparameters[par_name])
+        for par_name in shapeparameters]
 
     for (p, u) in parameterupdates
         BW = isobars[p].Xlineshape
@@ -132,14 +132,14 @@ function parse_model_dictionaries(modeldict; particledict)
     isobarnames = map(x -> x[3:end-1], couplingkeys)
 
     terms = []
-    for parname in couplingkeys
-        c_re_key = "Ar" * parname[3:end]
-        c_im_key = "Ai" * parname[3:end]
+    for par_name in couplingkeys
+        c_re_key = "Ar" * par_name[3:end]
+        c_im_key = "Ai" * par_name[3:end]
         value_re = MeasuredParameter(defaultparameters[c_re_key]).val
         value_im = MeasuredParameter(defaultparameters[c_im_key]).val
         value = value_re + 1im * value_im
         #
-        c0, d = parname2decaychain(parname, isobars)
+        c0, d = par_name2decaychain(par_name, isobars)
         #
         push!(terms, (c0 * value, d))
     end
