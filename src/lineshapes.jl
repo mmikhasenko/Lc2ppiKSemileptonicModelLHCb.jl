@@ -27,14 +27,17 @@ end
 # Flatte1405(pars::T; kw...) where {T} = Flatte1405(; pars, kw...)
 function (BW::Flatte1405)(σ)
     @unpack m, Γ, ma, mb = BW
-    p, p0 = breakup(σ, ma^2, mb^2), breakup(m^2, mπ^2, mΣ^2)
-    p′, p0′ = breakup(σ, mπ^2, mΣ^2), breakup(m^2, mπ^2, mΣ^2)
-    Γ1 = Γ * (p / p0) * m / sqrt(σ)
-    Γ2 = Γ * (p′ / p0′) * m / sqrt(σ)
+    # 
+    p_norm = breakup(m^2, mπ^2, mΣ^2)
+    p = breakup(σ, ma^2, mb^2) 
+    p′ = breakup(σ, mπ^2, mΣ^2)
+    # 
+    gsq = Γ / (2p_norm) * m
+    Γ1 = gsq * 2p / sqrt(σ) 
+    Γ2 = gsq * 2p′/ sqrt(σ)
     Γ_tot = Γ1 + Γ2
     1 / (m^2 - σ - 1im * m * Γ_tot)
 end
-
 
 # updatepars
 
