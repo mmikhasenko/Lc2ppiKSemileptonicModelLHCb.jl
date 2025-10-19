@@ -1,7 +1,7 @@
 name = "Lc2ppiKSemileptonicModelLHCb"
 uuid = "2be14d12-1226-44dd-959e-4e18ae37578d"
 authors = ["Mikhail Mikhasenko <mikhail.mikhasenko@cern.ch>"]
-version = "0.6.1"
+version = "0.7.0"
 
 [deps]
 HadronicLineshapes = "49c9d978-1f9d-4e96-a984-0a9783c0b9bf"
