@@ -13,8 +13,6 @@ using HadronicLineshapes
 using RecipesBase
 
 
-export ms, tbs, parities
-include("kinematics.jl")
 
 
 export Lineshape

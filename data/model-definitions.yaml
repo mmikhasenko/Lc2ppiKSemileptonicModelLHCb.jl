@@ -1,4 +1,7 @@
 Default amplitude model:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -75,6 +78,9 @@ Default amplitude model:
     AiD(1700)2: 2.105570 ± 0.644916 ± 6.0 ± 0.3
 
 Alternative amplitude model with K(892) with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -151,6 +157,9 @@ Alternative amplitude model with K(892) with free mass and width:
     AiD(1700)2: 3.625141 ± 0.844290
 
 Alternative amplitude model with L(1670) with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -227,6 +236,9 @@ Alternative amplitude model with L(1670) with free mass and width:
     AiD(1700)2: 1.981198 ± 0.569500
 
 Alternative amplitude model with L(1690) with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -303,6 +315,9 @@ Alternative amplitude model with L(1690) with free mass and width:
     AiD(1700)2: 1.522785 ± 0.722947
 
 Alternative amplitude model with D(1232) with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -379,6 +394,9 @@ Alternative amplitude model with D(1232) with free mass and width:
     AiD(1700)2: 2.391401 ± 0.706637
 
 Alternative amplitude model with L(1600), D(1600), D(1700) with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -459,6 +477,9 @@ Alternative amplitude model with L(1600), D(1600), D(1700) with free mass and wi
     AiD(1700)2: 8.140582 ± 0.906997
 
 Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi):
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -535,6 +556,9 @@ Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (p
     AiD(1700)2: 1.484256 ± 0.646875
 
 Alternative amplitude model with L(1800) contribution added with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -614,6 +638,9 @@ Alternative amplitude model with L(1800) contribution added with free mass and w
     AiD(1700)2: 0.711202 ± 0.639078
 
 Alternative amplitude model with L(1810) contribution added with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -695,6 +722,9 @@ Alternative amplitude model with L(1810) contribution added with free mass and w
     AiD(1700)2: 3.476165 ± 0.888907
 
 Alternative amplitude model with D(1620) contribution added with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -776,6 +806,9 @@ Alternative amplitude model with D(1620) contribution added with free mass and w
     AiD(1700)2: 4.165149 ± 1.264982
 
 Alternative amplitude model in which a Relativistic Breit-Wigner is used for the K(700) contribution:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -849,6 +882,9 @@ Alternative amplitude model in which a Relativistic Breit-Wigner is used for the
     AiD(1700)2: 2.058147 ± 0.653879
 
 Alternative amplitude model with K(700) with free mass and width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -925,6 +961,9 @@ Alternative amplitude model with K(700) with free mass and width:
     AiD(1700)2: 1.841069 ± 0.276973
 
 Alternative amplitude model with K(1410) contribution added with mass and width from PDG2020:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -1008,6 +1047,9 @@ Alternative amplitude model with K(1410) contribution added with mass and width 
     AiD(1700)2: -0.231568 ± 0.722400
 
 Alternative amplitude model in which a Relativistic Breit-Wigner is used for the K(1430) contribution:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -1081,6 +1123,9 @@ Alternative amplitude model in which a Relativistic Breit-Wigner is used for the
     AiD(1700)2: 2.237971 ± 0.381360
 
 Alternative amplitude model with K(1430) with free width:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -1156,6 +1201,9 @@ Alternative amplitude model with K(1430) with free width:
     AiD(1700)2: 2.228074 ± 0.258859
 
 Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha'':
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -1232,6 +1280,9 @@ Alternative amplitude model with an additional overall exponential form factor e
     AiD(1700)2: 2.113176 ± 0.354202
 
 Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405
     L(1520): BreitWigner
@@ -1307,6 +1358,9 @@ Alternative amplitude model with free radial parameter d for the Lc resonance, i
     AiD(1700)2: 1.728984 ± 0.718018
 
 Alternative amplitude model obtained using LS couplings:
+  reaction:
+    initial-state: Lambda_c+
+    final-state: [p, pi+, K-]
   lineshapes:
     L(1405): Flatte1405_LS
     L(1520): BreitWigner_LS

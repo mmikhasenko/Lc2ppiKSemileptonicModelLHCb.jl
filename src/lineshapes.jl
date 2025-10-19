@@ -8,6 +8,8 @@ breakup(m², m1², m2²) = sqrtKallenFact(sqrt(m²), sqrt(m1²), sqrt(m2²)) / (
 end
 #
 function (BW::BuggBreitWigner)(σ)
+    mK = 0.493677
+    mπ = 0.13957018
     σA = mK^2 - mπ^2 / 2
     @unpack m, Γ, γ = BW
     Γ_dep = (σ - σA) / (m^2 - σA) * Γ * exp(-γ * σ)
@@ -22,10 +24,12 @@ end
 end
 #
 function (BW::BuggBreitWignerExpFF)(σ)
+    mK = 0.493677
+    mπ = 0.13957018
     σA = mK^2 - mπ^2 / 2
     @unpack m, Γ, γ, α = BW
     Γ_dep = (σ - σA) / (m^2 - σA) * Γ * exp(-γ * σ)
-    q = breakup(σ, mk^2, mπ^2)
+    q = breakup(σ, mK^2, mπ^2)
     exp(-α * q^2) / (m^2 - σ - 1im * m * Γ_dep)
 end
 
@@ -41,6 +45,8 @@ end
 #
 # Flatte1405(pars::T; kw...) where {T} = Flatte1405(; pars, kw...)
 function (BW::Flatte1405)(σ)
+    mπ = 0.13957018
+    mΣ = 1.18937
     @unpack m, Γ1, Γ2, ma, mb = BW
     # 
     p_norm = breakup(m^2, mπ^2, mΣ^2)

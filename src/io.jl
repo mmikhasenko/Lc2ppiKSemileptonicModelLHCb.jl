@@ -10,7 +10,7 @@ function writejson(path, obj)
     end
 end
 
-function definechaininputs(key, dict)
+function definechaininputs(key, dict; tbs, parities)
     @unpack mass, lineshape, l = dict
     #
     k = Dict('K' => 1, 'D' => 3, 'L' => 2)[first(key)]
@@ -93,14 +93,42 @@ function replacementpair(parname, val)
 end
 
 
-function parse_model_dictionaries(modeldict; particledict)
+function build_reaction_kinematics(reaction, particledict)
+    initial_state = reaction["initial-state"]
+    final_state = reaction["final-state"]
 
-    # 1) get isobars
+    # Extract masses (convert MeV to GeV)
+    m0 = particledict[initial_state]["mass"] / 1000
+    m1 = particledict[final_state[1]]["mass"] / 1000
+    m2 = particledict[final_state[2]]["mass"] / 1000
+    m3 = particledict[final_state[3]]["mass"] / 1000
+
+    ms = ThreeBodyMasses(m1=m1, m2=m2, m3=m3, m0=m0)
+
+    # Extract spins and build parities array
+    jp_0 = str2jp(particledict[initial_state]["jp"])
+    jp_1 = str2jp(particledict[final_state[1]]["jp"])
+    jp_2 = str2jp(particledict[final_state[2]]["jp"])
+    jp_3 = str2jp(particledict[final_state[3]]["jp"])
+
+    parities = [jp_1.p, jp_2.p, jp_3.p, '±']  # Force '±' for parity-violating decay
+
+    tbs = ThreeBodySystem(ms, ThreeBodySpins(jp_1.two_j, jp_2.two_j, jp_3.two_j; two_h0=jp_0.two_j))
+
+    return (; tbs, parities)
+end
+
+function parse_model_dictionaries(modeldict; particledict)
+    # Extract reaction information and build kinematics
+    reaction = modeldict["reaction"]
+    (; tbs, parities) = build_reaction_kinematics(reaction, particledict)
+
+    # 1) get isobars - NOW PASS tbs and parities
     isobars = Dict()
     for (key, lineshape) in modeldict["lineshapes"]
         dict = Dict{String,Any}(particledict[key])
         dict["lineshape"] = lineshape
-        isobars[key] = definechaininputs(key, dict)
+        isobars[key] = definechaininputs(key, dict; tbs, parities)  # Pass tbs and parities
     end
 
     # 3) get parameters
@@ -128,7 +156,7 @@ function parse_model_dictionaries(modeldict; particledict)
         value_im = MeasuredParameter(defaultparameters[c_im_key]).val
         value = value_re + 1im * value_im
         #
-        c0, d = parname2decaychain(parname, isobars)
+        c0, d = parname2decaychain(parname, isobars; tbs)
         #
         push!(terms, (c0 * value, d))
     end

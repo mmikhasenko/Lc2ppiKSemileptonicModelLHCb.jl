@@ -37,7 +37,7 @@ model = Lc2ppiKModel(; chains, couplings, isobarnames)
 end
 
 # get a random point in the phase space
-σs0 = Invariants(model.chains[1].tbs.ms;
+σs0 = Invariants(masses(model.chains[1]);
     σ1=0.7980703453578917,
     σ2=3.6486261122281745)
 
@@ -112,4 +112,10 @@ end
     m = published_model("Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''")
     @test all(map(x->x.Xlineshape.α, m[m.names .== "K(1430)"].chains) .== 0.320379)
     @test all(map(x->x.Xlineshape.α, m[m.names .== "K(700)"].chains) .== -0.444257)
+end
+
+@testset "G1 and G2 are read correctly" begin
+    m = published_model("Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)")
+    @test all(map(x->x.Xlineshape.Γ1, m[m.names .== "L(1405)"].chains) .== 0.036126)
+    @test all(map(x->x.Xlineshape.Γ2, m[m.names .== "L(1405)"].chains) .== 0.099914)
 end
