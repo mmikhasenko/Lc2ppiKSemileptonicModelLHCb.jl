@@ -1,8 +1,11 @@
 {
   "cSpell.words": [
-    "Recoupling",
-    "updatepars",
+    "buildpkg",
     "parname",
+    "processcoverage",
+    "Recoupling",
+    "runtest",
+    "updatepars",
     "Weisskopf",
     "writejson",
     "Xlineshape"
