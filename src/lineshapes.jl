@@ -43,7 +43,6 @@ end
     mb::Float64
 end
 #
-# Flatte1405(pars::T; kw...) where {T} = Flatte1405(; pars, kw...)
 function (BW::Flatte1405)(σ)
     mπ = 0.13957018
     mΣ = 1.18937
