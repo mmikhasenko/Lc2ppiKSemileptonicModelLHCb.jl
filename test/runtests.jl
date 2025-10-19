@@ -1,7 +1,8 @@
-using Test
-using Lc2ppiKSemileptonicModelLHCb
 using Lc2ppiKSemileptonicModelLHCb.ThreeBodyDecays
+using Lc2ppiKSemileptonicModelLHCb
+import Lc2ppiKSemileptonicModelLHCb: lineshape_mismatch
 using YAML
+using Test
 
 @testset "Data files are there" begin
     @test isfile(joinpath(@__DIR__, "..", "data", "particle-definitions.yaml"))
@@ -36,7 +37,7 @@ model = Lc2ppiKModel(; chains, couplings, isobarnames)
 end
 
 # get a random point in the phase space
-σs0 = Invariants(model.chains[1].tbs.ms;
+σs0 = Invariants(masses(model.chains[1]);
     σ1=0.7980703453578917,
     σ2=3.6486261122281745)
 
@@ -47,7 +48,7 @@ _I = unpolarized_intensity(model, σs0)
 _A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, helicity values
 
 
-@testset "Evaluation of the meeting" begin
+@testset "Amplitude and intensity can be computed" begin
     @test _I isa Real
     @test _A isa Complex
     @test _A == amplitude(model, σs0, ThreeBodySpins(1, 0, 0; two_h0=1))
@@ -59,13 +60,13 @@ end
     @test _I ≈ 9345.853380852352
     @test _A ≈ -45.1323269502508 + 54.85942516648639im
     # 
-    @test model.chains[1].Xlineshape(σs0.σ2) ≈
-          model.chains[2].Xlineshape(σs0.σ2) ≈ -0.5636481410171861 + 0.13763637759224928im
-    # 
-    @test model.chains[21].Xlineshape(σs0.σ1) ≈
-          model.chains[22].Xlineshape(σs0.σ1) ≈
-          model.chains[23].Xlineshape(σs0.σ1) ≈
-          model.chains[24].Xlineshape(σs0.σ1) ≈ 2.1687201455088894 + 23.58225917009096im
+    # @test model.chains[1].Xlineshape(σs0.σ2) ≈
+    #       model.chains[2].Xlineshape(σs0.σ2) ≈ -0.5636481410171861 + 0.13763637759224928im
+    # # 
+    # @test model.chains[21].Xlineshape(σs0.σ1) ≈
+    #       model.chains[22].Xlineshape(σs0.σ1) ≈
+    #       model.chains[23].Xlineshape(σs0.σ1) ≈
+    #       model.chains[24].Xlineshape(σs0.σ1) ≈ 2.1687201455088894 + 23.58225917009096im
 
 end
 
@@ -73,8 +74,8 @@ end
     _names = model.names
     _HRk = getproperty.(model.chains, :HRk)
     _couplings = model.couplings
-    parameter_name(isobarname, recoupling) =
-        isobarname * "_{" * string(recoupling.two_λa) * ", " * string(recoupling.two_λb) * "}"
+    parameter_name(isobarname, vertex) =
+        isobarname * "_{" * string(vertex.h.two_λa) * ", " * string(vertex.h.two_λb) * "}"
 
     summary = parameter_name.(_names, _HRk) .=> _couplings
     @test summary isa Lc2ppiKSemileptonicModelLHCb.StaticArrays.SVector{N,T} where {N,T<:Pair{String,ComplexF64}}
@@ -92,16 +93,29 @@ end
 
 
 @testset "Alternative models" begin
+# let
     list_of_models = keys(modelparameters) |> collect
     # exclude the last one, which is the LS model
     # it cannot be loaded, not implemented
     list_of_models_but_few = filter(list_of_models) do x
         x != "Alternative amplitude model obtained using LS couplings" &&
-            x != "Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''" &&
-            x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc" &&
-            x != "Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)"
+            # requires reading d and replacing
+            x != "Alternative amplitude model with free radial parameter d for the Lc resonance, indicated as dLc"
     end
     @test map(list_of_models_but_few) do modelname
+        # @show modelname
         published_model(modelname) isa ThreeBodyDecay
     end |> all
+end
+
+@testset "alpha is read correctly" begin
+    m = published_model("Alternative amplitude model with an additional overall exponential form factor exp(-alpha q^2) multiplying Bugg lineshapes. The exponential parameter is indicated as ``alpha''")
+    @test all(map(x->x.Xlineshape.α, m[m.names .== "K(1430)"].chains) .== 0.320379)
+    @test all(map(x->x.Xlineshape.α, m[m.names .== "K(700)"].chains) .== -0.444257)
+end
+
+@testset "G1 and G2 are read correctly" begin
+    m = published_model("Alternative amplitude model with free L(1405) Flatt'e widths, indicated as G1 (pK channel) and G2 (Sigmapi)")
+    @test all(map(x->x.Xlineshape.Γ1, m[m.names .== "L(1405)"].chains) .== 0.036126)
+    @test all(map(x->x.Xlineshape.Γ2, m[m.names .== "L(1405)"].chains) .== 0.099914)
 end

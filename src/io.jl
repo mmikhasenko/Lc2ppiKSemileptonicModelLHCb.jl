@@ -10,29 +10,14 @@ function writejson(path, obj)
     end
 end
 
-"""
-    ifhyphenaverage(s::String)
-
-The function treats the shape-parameter fields in the particle-description file.
-If range is provided, it averages the limits.
-"""
-function ifhyphenaverage(s::String)
-    factor = findfirst('-', s) === nothing ? 1 : 2
-    eval(Meta.parse(replace(s, '-' => '+'))) / factor
-end
-ifhyphenaverage(v::Number) = v
-
-
-function definechaininputs(key, dict)
-    @unpack mass, width, lineshape = dict
+function definechaininputs(key, dict; tbs, parities)
+    @unpack mass, lineshape, l = dict
     #
     k = Dict('K' => 1, 'D' => 3, 'L' => 2)[first(key)]
     #
     jp_R = str2jp(dict["jp"])
     parity = jp_R.p
     two_j = jp_R.two_j
-    #
-    massval, widthval = ifhyphenaverage.((mass, width)) ./ 1e3
     #
     i, j = ij_from_k(k)
     #
@@ -45,38 +30,56 @@ function definechaininputs(key, dict)
     minLS = first(sort(vcat(two_LS...); by=x -> x[1]))
     minL = div(minLS[1], 2)
     #
-    ls = possible_ls(reaction_ij)
-    length(ls) != 1 && error("expected the only ls: $(ls)")
-    only_two_ls = first(ls)
-    l = div(only_two_ls[1], 2)
-    #
-    Hij = ParityRecoupling(two_js[i], two_js[j], reaction_ij)
-    Xlineshape = eval(
-        quote
-            $(Symbol(lineshape))(
-                (; m=$massval, Γ=$widthval);
-                name=$key,
-                l=$l,
-                minL=$minL,
-                m1=$(ms[i]), m2=$(ms[j]), mk=$(ms[k]), m0=$(ms[4]))
-        end)
-    return (; k, Xlineshape, Hij, two_j, parity)
+    Hij = VertexFunction(ParityRecoupling(two_js[i], two_js[j], reaction_ij), BlattWeisskopf{l}(1.5))
+    # 
+    Xlineshape = build_lineshape(lineshape |> Symbol |> eval, dict)
+    return (; k, Xlineshape, Hij, two_j, parity, minL)
 end
 
-
-
+function build_lineshape(::Type{BreitWigner}, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    ma = dict["ma"] / 1000
+    mb = dict["mb"] / 1000
+    l = dict["l"]
+    d = dict["d"]
+    return BreitWigner(; m, Γ, ma, mb, l, d)
+end
+function build_lineshape(::Type{Flatte1405}, dict)
+    m = dict["mass"] / 1000
+    Γ1 = dict["G1"] / 1000
+    Γ2 = dict["G2"] / 1000
+    ma = dict["ma"] / 1000
+    mb = dict["mb"] / 1000
+    return Flatte1405(; m, Γ1, Γ2, ma, mb)
+end
+function build_lineshape(::Type{BuggBreitWigner}, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    γ = dict["gamma"]
+    return BuggBreitWigner(; m, Γ, γ)
+end
+function build_lineshape(::Type{BuggBreitWignerExpFF}, dict)
+    m = dict["mass"] / 1000
+    Γ = dict["width"] / 1000
+    γ = dict["gamma"]
+    α = dict["alpha"]
+    return BuggBreitWignerExpFF(; m, Γ, γ, α)
+end
 # shape parameters
-function parseshapedparameter(parname)
-    keytemp = r"([M,G]|gamma|alpha)"
+function parseshapedparameter(par_name)
+    keytemp = r"([M,G]|G[12]|gamma|alpha)"
     nametemp = r"([L,K,D]\([0-9]*\))"
-    m = match(keytemp * nametemp, parname)
-    m === nothing && error("The name of the shared parameter, $(parname), is not recognized!")
+    m = match(keytemp * nametemp, par_name)
+    m === nothing && error("The name of the shared parameter, $(par_name), is not recognized!")
     return (key=m[1], isobarname=m[2])
 end
 
 function keyname2symbol(key)
     key == "M" && return :m
     key == "G" && return :Γ
+    key == "G1" && return :Γ1
+    key == "G2" && return :Γ2
     key == "gamma" && return :γ
     key == "alpha" && return :α
     error("The name of the shared parameter, $(key), is not recognized!")
@@ -90,14 +93,42 @@ function replacementpair(parname, val)
 end
 
 
-function parse_model_dictionaries(modeldict; particledict)
+function build_reaction_kinematics(reaction, particledict)
+    initial_state = reaction["initial-state"]
+    final_state = reaction["final-state"]
 
-    # 1) get isobars
+    # Extract masses (convert MeV to GeV)
+    m0 = particledict[initial_state]["mass"] / 1000
+    m1 = particledict[final_state[1]]["mass"] / 1000
+    m2 = particledict[final_state[2]]["mass"] / 1000
+    m3 = particledict[final_state[3]]["mass"] / 1000
+
+    ms = ThreeBodyMasses(m1=m1, m2=m2, m3=m3, m0=m0)
+
+    # Extract spins and build parities array
+    jp_0 = str2jp(particledict[initial_state]["jp"])
+    jp_1 = str2jp(particledict[final_state[1]]["jp"])
+    jp_2 = str2jp(particledict[final_state[2]]["jp"])
+    jp_3 = str2jp(particledict[final_state[3]]["jp"])
+
+    parities = [jp_1.p, jp_2.p, jp_3.p, '±']  # Force '±' for parity-violating decay
+
+    tbs = ThreeBodySystem(ms, ThreeBodySpins(jp_1.two_j, jp_2.two_j, jp_3.two_j; two_h0=jp_0.two_j))
+
+    return (; tbs, parities)
+end
+
+function parse_model_dictionaries(modeldict; particledict)
+    # Extract reaction information and build kinematics
+    reaction = modeldict["reaction"]
+    (; tbs, parities) = build_reaction_kinematics(reaction, particledict)
+
+    # 1) get isobars - NOW PASS tbs and parities
     isobars = Dict()
     for (key, lineshape) in modeldict["lineshapes"]
         dict = Dict{String,Any}(particledict[key])
         dict["lineshape"] = lineshape
-        isobars[key] = definechaininputs(key, dict)
+        isobars[key] = definechaininputs(key, dict; tbs, parities)  # Pass tbs and parities
     end
 
     # 3) get parameters
@@ -110,7 +141,7 @@ function parse_model_dictionaries(modeldict; particledict)
     for (p, u) in parameterupdates
         BW = isobars[p].Xlineshape
         isobars[p] = merge(isobars[p],
-            (Xlineshape=updatepars(BW, merge(BW.pars, u)),))
+            (Xlineshape=updatepars(BW, u),))
     end
 
     # 3) get couplings
@@ -125,13 +156,15 @@ function parse_model_dictionaries(modeldict; particledict)
         value_im = MeasuredParameter(defaultparameters[c_im_key]).val
         value = value_re + 1im * value_im
         #
-        c0, d = parname2decaychain(parname, isobars)
+        c0, d = parname2decaychain(parname, isobars; tbs)
         #
         push!(terms, (c0 * value, d))
     end
 
     chains = getindex.(terms, 2)
     couplings = getindex.(terms, 1)
+
+    couplings .*= lineshape_mismatch.(chains)
 
     (; chains, couplings, isobarnames)
 end
