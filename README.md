@@ -61,24 +61,24 @@ model = published_model("Default amplitude model")
 model.chains[3] |> dump
 
 # get a random point in the phase space
-σs0 = randomPoint(model.chains[1].tbs.ms)  # (σ1 = m23², σ2 = m31², σ3 = m12²)
+σs0 = randomPoint(masses(model))  # (σ1 = m23², σ2 = m31², σ3 = m12²)
+two_λs0 = ThreeBodySpins(1,0,0; two_h0=1) # helicity values
 
 # call intensity
-_I = unpolarizedintensity(model, σs0)
+_I = unpolarized_intensity(model, σs0)
 
 # call the amplitude
-_A = amplitude(model, σs0, [1, 0, 0, 1])  # pars: model, mandelstam variables, helicity values
+_A = amplitude(model, σs0, two_λs0)  # pars: model, mandelstam variables, helicity values
 
 # take TBS algebra for dalitz plot
-const ms = model.chains[1].tbs.ms
 σs_test = let m2Kπ = 0.79, m2πp = 3.64
-    Invatriants(ms; σ1=m2Kπ, σ2=m2πp)
+    Invatriants(masses(model); σ1=m2Kπ, σ2=m2πp)
 end
 #
 # evaluate what you want
-unpolarizedintensity(model, σs_test) # full model
-amplitude(model, σs0, [1, 0, 0, 1])
-amplitude(model.chains[2], σs0, [1, 0, 0, 1])  # for just 1 chain, number 2
+unpolarized_intensity(model, σs_test) # full model
+amplitude(model, σs0, two_λs0)
+amplitude(model.chains[2], σs0, two_λs0)  # for just 1 chain, number 2
 ```
 
 ## Contributing
