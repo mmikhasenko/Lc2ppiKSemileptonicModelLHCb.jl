@@ -8,6 +8,7 @@ using Parameters
 #
 using ThreeBodyDecays
 import ThreeBodyDecays: amplitude
+import ThreeBodyDecays: unpolarized_intensity
 #
 using HadronicLineshapes
 using RecipesBase
@@ -23,7 +24,7 @@ export updatepars
 include("lineshapes.jl")
 
 export Lc2ppiKModel
-export unpolarizedintensity
+export unpolarized_intensity
 include("amplitude.jl")
 
 export selectindexmap
