@@ -30,7 +30,7 @@ function definechaininputs(key, dict; tbs, parities)
     minLS = first(sort(vcat(two_LS...); by=x -> x[1]))
     minL = div(minLS[1], 2)
     #
-    Hij = VertexFunction(ParityRecoupling(two_js[i], two_js[j], reaction_ij), BlattWeisskopf{l}(1.5))
+    Hij = Vertex(ParityRecoupling(two_js[i], two_js[j], reaction_ij), BlattWeisskopf{l}(1.5))
     # 
     Xlineshape = build_lineshape(lineshape |> Symbol |> eval, dict)
     return (; k, Xlineshape, Hij, two_j, parity, minL)

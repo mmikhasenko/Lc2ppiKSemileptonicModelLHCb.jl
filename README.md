@@ -98,3 +98,7 @@ This project is based on the original analysis conducted by the LHCb collaborati
 ## License
 
 `Lc2ppiKSemileptonicModelLHCb.jl` is available under [GPLv3+ license](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl/blob/main/LICENSE).
+
+## ThreeBodyDecays 0.16
+
+Requires ThreeBodyDecays 0.16. Published models store `reference_k = 1`. With particle ordering `(p, pi, K; Lc)`, the only spinful particles are the proton and parent, both already using reference 1 under the former `(1,2,3,1)` default. The fitted couplings and amplitude/intensity regression values are unchanged. Model chains, names, and couplings are now tuples upstream; vertices use `Vertex`.

@@ -7,5 +7,7 @@ function Lc2ppiKModel(; chains, couplings, isobarnames)
 
 	mypairs = isobarnames[order] .=> zip(couplings[order], chains[order])
 	x = Vector{Pair{String, Tuple{Complex, AbstractDecayChain}}}(mypairs)
-	ThreeBodyDecay(x)
+	# Only p (particle 1) and Lc carry spin; both used reference 1 in
+	# the former mixed default (1,2,3,1). The fitted couplings are unchanged.
+	ThreeBodyDecay(x; reference_k = 1)
 end
