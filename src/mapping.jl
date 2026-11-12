@@ -30,7 +30,7 @@ function parname2decaychain(parname, isobars; tbs)
     two_λR, two_λk = selectindexmap(isobarname)[couplingindex]
     two_λR′, two_λk′, c′ =
         couplingLHCb2DPD(two_λR, two_λk; k, two_j, parity)
-    HRk = VertexFunction(NoRecoupling(two_λR′, two_λk′), BlattWeisskopf{minL}(5.0))
+    HRk = Vertex(NoRecoupling(two_λR′, two_λk′), BlattWeisskopf{minL}(5.0))
     (c′, DecayChain(; k, Xlineshape, Hij, HRk, two_j, tbs))
 end
 

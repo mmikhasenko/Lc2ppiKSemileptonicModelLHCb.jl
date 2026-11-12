@@ -78,7 +78,8 @@ end
         isobarname * "_{" * string(vertex.h.two_λa) * ", " * string(vertex.h.two_λb) * "}"
 
     summary = parameter_name.(_names, _HRk) .=> _couplings
-    @test summary isa Lc2ppiKSemileptonicModelLHCb.StaticArrays.SVector{N,T} where {N,T<:Pair{String,ComplexF64}}
+    @test summary isa Tuple{Vararg{Pair{String,ComplexF64}}}
+    @test ThreeBodyDecays.reference_k(model) == 1
 end
 
 
